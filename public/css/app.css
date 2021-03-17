@@ -10008,17 +10008,56 @@ h3 {
   }
 }
 /* Mi código */
+@font-face {
+  font-family: 'cairo';
+  src: url('../../resources/fonts/Cairo/cairo-regular-webfont.woff2') format('woff2'),
+       url('../../resources/fonts/Cairo/cairo-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'cairo light';
+  src: url('../../resources/fonts/Cairo/cairo-light-webfont.woff2') format('woff2'),
+       url('../../resources/fonts/Cairo/cairo-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+@font-face {
+  font-family: 'cairo bold';
+  src: url('../../resources/fonts/Cairo/cairo-bold-webfont.woff2') format('woff2'),
+       url('../../resources/fonts/Cairo/cairo-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+@font-face {
+  font-family: 'cairo black';
+  src: url('../../resources/fonts/Cairo/cairo-black-webfont.woff2') format('woff2'),
+       url('../../resources/fonts/Cairo/cairo-black-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
 
 h1{
   
   text-align: center;
-  font-family: 'Sawarabi Gothic', sans-serif;
+  font-family: 'cairo black', sans-serif;
   font-size: 6rem;
 
 
 }
 
+.navbar-brand{
+  font-family: 'cairo', sans-serif;
+  font-size: 1.5em;
+}
+
 .button{
+  font-family: 'cairo light', sans-serif;
   background-color: #eb566c;
   border: none;
   border-radius: 1.2em;
@@ -10041,7 +10080,7 @@ h1{
 text-align: center;
 padding-top: 15rem;
 color: white;
-font-family: 'Sawarabi Gothic', sans-serif;
+font-family: 'cairo bold', sans-serif;;
 font-size: 3rem;
 }
 
@@ -10064,6 +10103,26 @@ font-size: 3rem;
   margin: 5px;
 }
 
+.content{
+  font-family: 'cairo', sans-serif;
+  color: white;
+  font-size: 2.5em;
+  text-align: center;
+  margin-top: 1em;
+  padding: 0.5em;
+}
+
+.down-arrow{
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10em;
+
+}
+
+/* Menú hamburgesa */
+
 @media screen and (max-width:1200px){
 
   #app{
@@ -10075,7 +10134,7 @@ font-size: 3rem;
     z-index: 1;
     position: absolute;
     right: 0px;
-    height: 30vh;
+    height: 30vh; /*ampliar el largo para el menú*/
     top: 7.2vh;
     background-color: rgb(39 35 51);
     display: flex;          

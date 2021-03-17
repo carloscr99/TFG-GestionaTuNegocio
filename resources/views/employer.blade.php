@@ -44,13 +44,16 @@
 
                         <div class="form-group row">
                             <label for="rol" class="col-md-4 col-form-label text-md-right">{{ __('Rol: ') }}</label>
+                            <div class="col-md-6">
+                                <select id="rol" name="rol" class="btn btn-secondary btn-lg dropdown-toggle">
+                                    <option> Seleciona su rol</option>
+                                    <option value="trabajador" {{old('rol') == 'trabajador' ? 'selected' : ''}}>
+                                        Trabajador</option>
+                                    <option value="encargado" {{old('rol') == 'encargado' ? 'selected' : ''}}>Encargado
+                                    </option>
 
-                            <select id="rol" name="rol" class="btn btn-secondary btn-lg dropdown-toggle">
-                                <option> Seleciona su rol</option>
-                                <option value="trabajador" {{old('rol') == 'trabajador' ? 'selected' : ''}}>Trabajador</option>
-                                <option value="encargado" {{old('rol') == 'encargado' ? 'selected' : ''}}>Encargado</option>
-
-                            </select>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="form-group row">
