@@ -8,6 +8,7 @@
                 <div class="card-header">{{ __('Nuevo producto') }}</div>
 
                 <div class="card-body">
+                
                     <form method="POST" action="NewProduct">
                         @csrf
 
@@ -92,6 +93,23 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="reference"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Imagen del producto:') }}</label>
+
+                            <div class="col-md-6">
+                            <input type="file" name="img-producto" id="img-producto" accept=".jpg, .jpeg, .png" />
+                            <?php
+                            $owner = Auth::user(); //Obtenemos la información del usuario loggeado
+                            $cifEmpresa = $owner->workAt;
+                            echo "<input id='cif' type='text' value='$cifEmpresa' hidden/>"
+                            ?>
+                            
+                            
+                            </div>
+                        </div>
+
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -106,5 +124,20 @@
         </div>
     </div>
 </div>
-<!-- @include('sweetalert::alert') -->
+<script>
+var imagenASubir = document.getElementById("img-producto");
+var cif = document.getElementById("cif").value;
+console.log(cif);
+imagenASubir.addEventListener('change', function(e){
+//Obtenemos el fichero
+var file = e.target.files[0];
+
+//Creamos la referencia de almacenaje
+
+var storageRef = firebase.storage().ref(cif+"/"+file.name);
+
+//Subimos la imagen
+storageRef.put(file);
+});
+</script>
 @endsection
