@@ -98,7 +98,7 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('Imagen del producto:') }}</label>
 
                             <div class="col-md-6">
-                                <input type="file" name="img-producto" id="img-producto" accept=".jpg, .jpeg, .png" />
+                                <input type="file" name="img-producto" id="img-producto" accept=".jpg, .jpeg, .png" disabled/>
                                 <?php
 $owner = Auth::user(); //Obtenemos la información del usuario loggeado
 $cifEmpresa = $owner->workAt;
@@ -114,7 +114,7 @@ echo "<input id='cif' type='text' value='$cifEmpresa' hidden/>"
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" id="btn-submit" class="btn btn-primary" disabled >
                                     {{ __('Añadir producto') }}
                                 </button>
 
@@ -127,7 +127,9 @@ echo "<input id='cif' type='text' value='$cifEmpresa' hidden/>"
     </div>
 </div>
 <script>
-// Script para subir la imagen a google Firebase
+
+habilitarBotonNewProduct();
+    // Script para subir la imagen a google Firebase
 var imagenASubir = document.getElementById("img-producto");
 var cif = document.getElementById("cif").value;
 console.log(cif);
@@ -172,5 +174,6 @@ imagenASubir.addEventListener('change', function(e) {
 
 
 });
+
 </script>
 @endsection

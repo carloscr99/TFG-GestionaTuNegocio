@@ -40,7 +40,7 @@
     </script>
 
 
-
+    <script src="{{ asset('../resources/js/myJS.js') }}"></script>
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -137,7 +137,7 @@
             @yield('content')
         </main>
     </div>
-    <script src="{{ asset('../resources/js/myJS.js') }}"></script>
+    <script src="{{ asset('../resources/js/hamburguerMenu.js') }}"></script>
 
 </body>
 
