@@ -37,8 +37,11 @@ Route::get('/NewProduct', [App\Http\Controllers\ProductController::class, 'index
 
 Route::post('NewProduct', [App\Http\Controllers\ProductController::class, 'create']);
 
+
 // Route::post('/NewProductEdit', [App\Http\Controllers\ProductController::class, 'edit']);
 
-Route::get('/ProductEdit/{product?}', [App\Http\Controllers\ProductController::class, 'edit'])->name('ProductEdit');
+Route::get('/ProductEdit/{product?}', [App\Http\Controllers\ProductController::class, 'openEdit'])->name('ProductEdit');
+
+Route::post('/ProductEdit/{product?}', [App\Http\Controllers\ProductController::class, 'edit']);
 
 
