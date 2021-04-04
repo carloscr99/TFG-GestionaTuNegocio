@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     public function index()
     {
+       
         return view('NewProduct');
     }
 
@@ -29,6 +31,17 @@ class ProductController extends Controller
 
         $product->save();
         return redirect('home');
+
+    }
+
+    public function edit(Request $request, $product)
+    {
+       
+        $owner = Auth::user();
+
+        $product = DB::table('products')->where('reference', $product)->where('storedAt', $owner->workAt)->first();
+
+        return view('NewProduct', ['product' => $product]);
 
     }
 }

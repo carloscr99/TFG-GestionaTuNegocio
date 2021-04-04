@@ -5,6 +5,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,5 +36,9 @@ Route::post('NewEmployer', [App\Http\Controllers\EmployerController::class, 'cre
 Route::get('/NewProduct', [App\Http\Controllers\ProductController::class, 'index'])->name('NewProduct');
 
 Route::post('NewProduct', [App\Http\Controllers\ProductController::class, 'create']);
+
+// Route::post('/NewProductEdit', [App\Http\Controllers\ProductController::class, 'edit']);
+
+Route::get('/ProductEdit/{product?}', [App\Http\Controllers\ProductController::class, 'edit'])->name('ProductEdit');
 
 

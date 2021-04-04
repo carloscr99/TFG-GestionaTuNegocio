@@ -20,17 +20,20 @@ function habilitarBotonNewProduct() {
 
     });
 
-    imgButton.addEventListener('change', function (event) {
+    if(imgButton){
+        imgButton.addEventListener('change', function (event) {
 
-        if (imgButton.disabled === false || imgButton.value === "") {
-            btnSubmit.disabled = false;
-
-        } else {
-            btnSubmit.disabled = true;
-        }
-
-    });
-
+            if (imgButton.disabled === false || imgButton.value === "") {
+                btnSubmit.disabled = false;
+    
+            } else {
+                btnSubmit.disabled = true;
+            }
+    
+        });
+    
+    }
+  
 }
 
 
