@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use RealRashid\SweetAlert\Facades\Alert;
 
 
 
@@ -18,6 +17,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 */
 
 Route::get('/', function () {
+
 
     return view('welcome');
     
@@ -44,4 +44,5 @@ Route::get('/ProductEdit/{product?}', [App\Http\Controllers\ProductController::c
 
 Route::post('/ProductEdit/{product?}', [App\Http\Controllers\ProductController::class, 'edit']);
 
+Route::delete('/ProductDelete/{product?}', [App\Http\Controllers\ProductController::class, 'delete']);
 

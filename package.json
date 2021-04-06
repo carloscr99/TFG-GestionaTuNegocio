@@ -21,7 +21,7 @@
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
         "sweetalert": "^2.1.2",
-        "sweetalert2": "^10.13.3"
+        "sweetalert2": "^10.15.7"
     },
     "dependencies": {
         "@firebase/app": "^0.6.17"

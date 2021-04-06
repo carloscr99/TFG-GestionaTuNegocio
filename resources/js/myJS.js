@@ -36,6 +36,46 @@ function habilitarBotonNewProduct() {
   
 }
 
+function deleteProduct($referenciaProducto) {
+
+    var route = "ProductDelete/";
+  
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "No es posible deshacer esta función!\n Vas a eliminar el producto con referencia: "+ $referenciaProducto,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type:'DELETE',
+                    url: route + $referenciaProducto,
+                    data: {"_token": $("meta[name='csrf-token']").attr("content")}, 
+                    success:function(data) {
+                        
+                        Swal.fire({
+                            title: "Eliminado!",
+                            text: "Producto eliminado correctamente!",
+                            type: "success"
+                        }).then(function() {
+                            window.location = "home";
+                        });
+                    }
+                 });
+
+           
+            }
+          })
+
+
+
+   
+}
+
 
 //De moment sense aplicar, está en newProductBlade.php
 function addImageToFirebase() {

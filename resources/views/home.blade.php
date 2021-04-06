@@ -35,9 +35,9 @@
                             </p>
                         </div>
                         <div class="card-footer">
-                            <a href={{route('ProductEdit', [$product->reference])}} class="btn btn-primary">Editar producto</a>
-                      
+                            <a href={{route('ProductEdit', [$product->reference])}} class="btn btn-primary">Editar producto</a>                  
                         </div>
+                        <a onclick="deleteProduct('{{$product->reference}}')" class="btn btn-danger eliminarImagen">Eliminar producto</a>
                     </div>
                 </div>
             </div>

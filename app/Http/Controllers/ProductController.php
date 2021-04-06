@@ -49,7 +49,6 @@ class ProductController extends Controller
 
      
         
-
         return redirect('home');
 
     }
@@ -62,6 +61,14 @@ class ProductController extends Controller
         $product = DB::table('products')->where('reference', $product)->where('storedAt', $owner->workAt)->first();
 
         return view('NewProduct', ['product' => $product]);
+
+    }
+
+    public function delete(Request $request, $product){
+
+        $owner = Auth::user();
+
+        $product = DB::table('products')->where('reference', $product)->where('storedAt', $owner->workAt)->delete();
 
     }
 }
