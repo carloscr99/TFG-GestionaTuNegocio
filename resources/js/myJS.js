@@ -20,60 +20,83 @@ function habilitarBotonNewProduct() {
 
     });
 
-    if(imgButton){
+    if (imgButton) {
         imgButton.addEventListener('change', function (event) {
 
             if (imgButton.disabled === false || imgButton.value === "") {
                 btnSubmit.disabled = false;
-    
+
             } else {
                 btnSubmit.disabled = true;
             }
-    
+
         });
-    
+
     }
-  
+
 }
 
-function deleteProduct($referenciaProducto) {
+function deleteProduct($referenciaProducto, $cifEmpresa) {
 
     var route = "ProductDelete/";
-  
+
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "No es posible deshacer esta función!\n Vas a eliminar el producto con referencia: " + $referenciaProducto,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'DELETE',
+                url: route + $referenciaProducto,
+                data: { "_token": $("meta[name='csrf-token']").attr("content") },
+                success: function (data) {
+                    deleteImageProduct($cifEmpresa, $referenciaProducto);
+                    Swal.fire(
+                        'Eliminado!',
+                        'Producto eliminado correctamente',
+                        'success'
+                    ).then(function () {
+                        window.location = "home";
+                    });
+                }
+            });
+
+
+        }
+    })
+
+}
+
+function deleteImageProduct($cifEmpresa, $referenciaProducto) {
+
+    var storage = firebase.storage();
+
+    var storageRef = storage.ref();
+
+    // Create a reference to the file to delete
+    var desertRef = storageRef.child($cifEmpresa + '/'+ $referenciaProducto);
+
+    // Delete the file
+    desertRef.delete().then(function () {
+        // File deleted successfully
+      
+    }).catch(function (error) {
+        // Uh-oh, an error occurred!
         Swal.fire({
-            title: '¿Estás seguro?',
-            text: "No es posible deshacer esta función!\n Vas a eliminar el producto con referencia: "+ $referenciaProducto,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, eliminar',
-            cancelButtonText: 'Cancelar'
-          }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type:'DELETE',
-                    url: route + $referenciaProducto,
-                    data: {"_token": $("meta[name='csrf-token']").attr("content")}, 
-                    success:function(data) {
-                        
-                        Swal.fire({
-                            title: "Eliminado!",
-                            text: "Producto eliminado correctamente!",
-                            type: "success"
-                        }).then(function() {
-                            window.location = "home";
-                        });
-                    }
-                 });
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No se ha podido eliminar la imagen del producto de la base de datos.',
+          }).then(function () {
+            window.location = "home";
+        });
+    });
 
-           
-            }
-          })
-
-
-
-   
 }
 
 
