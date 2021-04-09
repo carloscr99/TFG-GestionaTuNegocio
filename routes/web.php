@@ -29,7 +29,9 @@ Auth::routes();
 
  Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/NewEmployer', [App\Http\Controllers\EmployerController::class, 'index'])->name('NewEmployer');
+Route::get('/Employers', [App\Http\Controllers\EmployerController::class, 'index'])->name('employers');
+
+Route::get('/NewEmployer', [App\Http\Controllers\EmployerController::class, 'newEmployer'])->name('NewEmployer');
 
 Route::post('NewEmployer', [App\Http\Controllers\EmployerController::class, 'create']);
 

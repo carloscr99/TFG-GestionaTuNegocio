@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+
 
 class EmployerController extends Controller
 {
@@ -39,7 +41,16 @@ class EmployerController extends Controller
     public function index()
     {
 
-        return view('employer');
+        $employers = DB::table('users')->get();
+
+        return view('employers', ['employers' => $employers]);
+
+    }
+
+    public function newEmployer()
+    {
+
+        return view('newEmployer');
 
     }
 
@@ -54,6 +65,7 @@ class EmployerController extends Controller
         //Validamos los datos
         $validateData =  $request->validate ([
             'name' => ['required', 'string', 'max:255'],
+            'dni' => ['required', 'string', 'max:9', 'regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'rol' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -63,6 +75,7 @@ class EmployerController extends Controller
 
         $employer = new User;
         $employer->name = $request->name;
+        $employer->dni = $request->dni;
         $employer->email = $request->email;
         $employer->rol = $request->rol;
         $employer->password = $request->password;

@@ -108,8 +108,8 @@
                                     {{ __('Home') }}
                                 </a>
                                 <hr>
-                                <a class="dropdown-item" href="{{ route('NewEmployer') }}">
-                                    {{ __('Añadir empleado') }}
+                                <a class="dropdown-item" href="{{ route('employers') }}">
+                                    {{ __('Empleados') }}
                                 </a>
                                 <hr>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
