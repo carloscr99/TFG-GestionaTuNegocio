@@ -35,6 +35,10 @@ Route::get('/NewEmployer', [App\Http\Controllers\EmployerController::class, 'new
 
 Route::post('NewEmployer', [App\Http\Controllers\EmployerController::class, 'create']);
 
+Route::get('/EmployerEdit/{employer?}', [App\Http\Controllers\EmployerController::class, 'openEdit'])->name('EmployerEdit');
+
+Route::post('/EmployerEdit/{employer?}', [App\Http\Controllers\EmployerController::class, 'edit']);
+
 Route::get('/NewProduct', [App\Http\Controllers\ProductController::class, 'index'])->name('NewProduct');
 
 Route::post('NewProduct', [App\Http\Controllers\ProductController::class, 'create']);

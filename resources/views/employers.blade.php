@@ -32,7 +32,7 @@
                             <p class="card-text">{{$employer->email}}</p>
                         </div>
                         <div class="card-footer">
-                            <a href="{{ route('NewEmployer', [$employer->dni]) }}" class="btn btn-primary">Editar empleado</a>
+                            <a href={{ route('EmployerEdit', [$employer->dni])}} class="btn btn-primary">Editar empleado</a>
 
                         </div>
                     </div>
