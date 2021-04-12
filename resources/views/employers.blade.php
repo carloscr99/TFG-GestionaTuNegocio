@@ -30,11 +30,13 @@
                         <div class="card-body">
                             <h4 class="card-title">{{$employer->name}}</h4>
                             <p class="card-text">{{$employer->email}}</p>
+                            <p class="card-text">{{$employer->rol}}</p>
                         </div>
                         <div class="card-footer">
                             <a href={{ route('EmployerEdit', [$employer->dni])}} class="btn btn-primary">Editar empleado</a>
-
                         </div>
+                        <a onclick="deleteEmployer('{{$employer->dni}}', '{{$employer->rol}}')"
+                            class="btn btn-danger">Eliminar empleado</a>
                     </div>
                 </div>
 

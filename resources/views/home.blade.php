@@ -37,7 +37,7 @@
                                 producto</a>
                         </div>
                         <a onclick="deleteProduct('{{$product->reference}}', '{{Auth::user()->workAt}}')"
-                            class="btn btn-danger eliminarImagen">Eliminar producto</a>
+                            class="btn btn-danger">Eliminar producto</a>
                     </div>
                 </div>
                 @endforeach

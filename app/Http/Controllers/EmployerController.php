@@ -122,4 +122,12 @@ class EmployerController extends Controller
         return redirect('Employers');
 
     }
+
+    public function delete(Request $request, $employer){
+
+        $owner = Auth::user();
+
+        $product = DB::table('users')->where('dni', $employer)->where('workAt', $owner->workAt)->delete();
+
+    }
 }

@@ -39,12 +39,11 @@ Route::get('/EmployerEdit/{employer?}', [App\Http\Controllers\EmployerController
 
 Route::post('/EmployerEdit/{employer?}', [App\Http\Controllers\EmployerController::class, 'edit']);
 
+Route::delete('/EmployerDelete/{employer?}', [App\Http\Controllers\EmployerController::class, 'delete']);
+
 Route::get('/NewProduct', [App\Http\Controllers\ProductController::class, 'index'])->name('NewProduct');
 
 Route::post('NewProduct', [App\Http\Controllers\ProductController::class, 'create']);
-
-
-// Route::post('/NewProductEdit', [App\Http\Controllers\ProductController::class, 'edit']);
 
 Route::get('/ProductEdit/{product?}', [App\Http\Controllers\ProductController::class, 'openEdit'])->name('ProductEdit');
 
