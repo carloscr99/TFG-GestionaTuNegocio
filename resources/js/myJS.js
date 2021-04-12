@@ -142,8 +142,6 @@ function deleteEmployer($dni, $rol) {
             })
     }
 
-    
-
 }
 
 

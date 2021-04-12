@@ -12,7 +12,7 @@
     funciona el servico? Haz scroll
 </h3>
 
-<img src="../resources/img/down-arrow.gif" class="down-arrow" alt="Girl in a jacket">
+<img src="../resources/img/down-arrow.gif" class="down-arrow" alt="down arrow">
 
 <div class="content">
     <p>Lo primero que vas a tener que hacer es registrarte en nuestro sitio web mediante el botón <em>Registrarse</em>.

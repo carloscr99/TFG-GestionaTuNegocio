@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,7 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = DB::table('products')->get();
+
+        $owner = Auth::user(); 
+
+        $products = DB::table('products')->where('storedAt', $owner->workAt)->get();
         
          return view('home', ['products' => $products]);
     }

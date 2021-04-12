@@ -42,7 +42,9 @@ class EmployerController extends Controller
     public function index()
     {
 
-        $employers = DB::table('users')->get();
+        $owner = Auth::user();
+
+        $employers = DB::table('users')->where('workAt', $owner->workAt)->get();
 
         return view('employers', ['employers' => $employers]);
 
