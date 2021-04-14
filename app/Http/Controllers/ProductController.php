@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
@@ -38,9 +40,20 @@ class ProductController extends Controller
 
     public function create(Request $request)
     {
+
         $product = new Product;
 
         $owner = Auth::user(); //Obtenemos la información del usuario loggeado
+
+        $validateData =  $request->validate ([
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:300'],
+            'reference' => ['required', 'string', 'max:30', Rule::unique('products')->where('storedAt', $owner->workAt)],
+            'price' => ['required','regex:/^\d*(\.\d{2})?$/'],
+            'stock' => ['required', 'int'],
+        ]);
+
+        
 
         $product->name = $request->name;
         $product->description = $request->description;

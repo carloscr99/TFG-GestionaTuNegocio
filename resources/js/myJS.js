@@ -1,5 +1,3 @@
-
-
 function habilitarBotonNewProduct() {
     console.log("habilitarBotonNewProduct");
 
