@@ -112,10 +112,6 @@
                                     {{ __('Empleados') }}
                                 </a>
                                 <hr>
-                                <a class="dropdown-item" href="{{ route('providers') }}">
-                                    {{ __('Proveedores') }}
-                                </a>
-                                <hr>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

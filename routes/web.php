@@ -51,7 +51,4 @@ Route::post('/ProductEdit/{product?}', [App\Http\Controllers\ProductController::
 
 Route::delete('/ProductDelete/{product?}', [App\Http\Controllers\ProductController::class, 'delete']);
 
-Route::get('/Providers', [App\Http\Controllers\ProviderController::class, 'index'])->name('providers');
-
-Route::get('/NewProvider', [App\Http\Controllers\ProviderController::class, 'newProvider'])->name('newProvider');
 
