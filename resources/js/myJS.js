@@ -34,66 +34,85 @@ function habilitarBotonNewProduct() {
 
 }
 
-function deleteProduct($referenciaProducto, $cifEmpresa) {
+function deleteProduct($referenciaProducto, $cifEmpresa, $rol) {
 
-    var route = "ProductDelete/";
+    if($rol === 'trabajador'){
 
-    Swal.fire({
-        title: '¿Estás seguro?',
-        text: "No es posible deshacer esta función!\n Vas a eliminar el producto con referencia: " + $referenciaProducto,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, eliminar',
-        cancelButtonText: 'Cancelar'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                type: 'DELETE',
-                url: route + $referenciaProducto,
-                data: { "_token": $("meta[name='csrf-token']").attr("content") },
-                success: function (data) {
-                    deleteImageProduct($cifEmpresa, $referenciaProducto);
-                    Swal.fire(
-                        'Eliminado!',
-                        'Producto eliminado correctamente',
-                        'success'
-                    ).then(function () {
-                        window.location = "home";
-                    });
-                }
-            });
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No tienes permisos para hacer esto...',
+            
+          })
 
+    }else{
 
-        }
-    })
+        var route = "ProductDelete/";
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "No es posible deshacer esta función!\n Vas a eliminar el producto con referencia: " + $referenciaProducto,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: route + $referenciaProducto,
+                    data: { "_token": $("meta[name='csrf-token']").attr("content") },
+                    success: function (data) {
+                        deleteImageProduct($cifEmpresa, $referenciaProducto);
+                        Swal.fire(
+                            'Eliminado!',
+                            'Producto eliminado correctamente',
+                            'success'
+                        ).then(function () {
+                            window.location = "home";
+                        });
+                    }
+                });
+    
+    
+            }
+        })
+
+    }
+
+  
 
 }
 
 function deleteImageProduct($cifEmpresa, $referenciaProducto) {
 
-    var storage = firebase.storage();
+   
 
-    var storageRef = storage.ref();
+        var storage = firebase.storage();
 
-    // Create a reference to the file to delete
-    var desertRef = storageRef.child($cifEmpresa + '/'+ $referenciaProducto);
-
-    // Delete the file
-    desertRef.delete().then(function () {
-        // File deleted successfully
-      
-    }).catch(function (error) {
-        // Uh-oh, an error occurred!
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'No se ha podido eliminar la imagen del producto de la base de datos.',
-          }).then(function () {
-            window.location = "home";
+        var storageRef = storage.ref();
+    
+        // Create a reference to the file to delete
+        var desertRef = storageRef.child($cifEmpresa + '/'+ $referenciaProducto);
+    
+        // Delete the file
+        desertRef.delete().then(function () {
+            // File deleted successfully
+          
+        }).catch(function (error) {
+            // Uh-oh, an error occurred!
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No se ha podido eliminar la imagen del producto de la base de datos.',
+              }).then(function () {
+                window.location = "home";
+            });
         });
-    });
+
+
 
 }
 
@@ -140,6 +159,26 @@ function deleteEmployer($dni, $rol) {
             })
     }
 
+}
+
+function autorizadoCreateProducto($rol){
+
+    if($rol === 'trabajador'){
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No tienes permisos para hacer esto...',
+            
+          })
+
+    }else{
+        
+        window.location = "NewProduct";
+
+    }
+
+ 
 }
 
 

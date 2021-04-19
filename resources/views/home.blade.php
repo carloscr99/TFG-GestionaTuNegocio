@@ -16,7 +16,7 @@
                             </p>
                         </div>
                         <div class="card-footer">
-                            <a href="{{ route('NewProduct') }}" class="btn btn-primary">Añadir producto</a>
+                        <a onClick="autorizadoCreateProducto('{{ Auth::user()->rol }}')" class="btn btn-primary">Añadir producto</a>
 
                         </div>
                     </div>

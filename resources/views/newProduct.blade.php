@@ -19,8 +19,13 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('Nombre del producto:') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                            @if(\Auth::user()->rol == 'trabajador')
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                    name="name" value="{{ $product->name }}" required autocomplete="name" autofocus readonly>
+                            @else
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                                     name="name" value="{{ $product->name }}" required autocomplete="name" autofocus>
+                            @endif
 
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -35,9 +40,17 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('Descripción:') }}</label>
 
                             <div class="col-md-6">
+                            @if(\Auth::user()->rol == 'trabajador')
                                 <textarea id="description" type="description"
                                     class="form-control @error('description') is-invalid @enderror" name="description"
+                                    required autocomplete="description" readonly>{{ $product->description }}</textarea>
+                            @else
+
+                            <textarea id="description" type="description"
+                                    class="form-control @error('description') is-invalid @enderror" name="description"
                                     required autocomplete="description">{{ $product->description }}</textarea>
+
+                            @endif
 
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">
@@ -107,7 +120,13 @@
                         <div class="form-group row">
                             <label for="reference"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Nueva Imagen del producto:') }}</label>
-                            <input type="file" name="img-producto" id="img-producto" accept=".jpg, .jpeg, .png" />
+                        @if(\Auth::user()->rol == 'trabajador')
+                        <input type="file" name="img-producto" id="img-producto" accept=".jpg, .jpeg, .png" disabled/>
+                        @else
+                        <input type="file" name="img-producto" id="img-producto" accept=".jpg, .jpeg, .png" />
+                        @endif
+
+
                             <?php
 // Obtenemos este datos para almacenar la imagen dentro de la carpeta correspondiente
 $owner = Auth::user(); //Obtenemos la información del usuario loggeado
