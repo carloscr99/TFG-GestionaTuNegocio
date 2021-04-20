@@ -16,7 +16,11 @@
                             </p>
                         </div>
                         <div class="card-footer">
-                            <a href="{{ route('NewEmployer') }}" class="btn btn-primary">Añadir empleado</a>
+                        @if(\Auth::user()->rol == 'trabajador')
+                        <a class="btn btn-primary-disabled">Añadir empleado</a>
+                        @else
+                        <a href="{{ route('NewEmployer') }}" class="btn btn-primary">Añadir empleado</a>
+                        @endif
 
                         </div>
                     </div>
@@ -33,9 +37,14 @@
                             <p class="card-text">{{$employer->rol}}</p>
                         </div>
                         <div class="card-footer">
+                        @if((\Auth::user()->rol == 'trabajador') && Auth::user()->dni == $employer->dni)
                             <a href={{ route('EmployerEdit', [$employer->dni])}} class="btn btn-primary">Editar empleado</a>
+
+                        @else
+                        <a class="btn btn-primary-disabled">Editar empleado</a>
+                        @endif
                         </div>
-                        <a onclick="deleteEmployer('{{$employer->dni}}', '{{$employer->rol}}')"
+                        <a onclick="deleteEmployer('{{$employer->dni}}', '{{$employer->rol}}', '{{Auth::user()->rol}}')"
                             class="btn btn-danger">Eliminar empleado</a>
                     </div>
                 </div>

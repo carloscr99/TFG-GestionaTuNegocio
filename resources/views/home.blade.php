@@ -36,7 +36,7 @@
                             <a href={{route('ProductEdit', [$product->reference])}} class="btn btn-primary">Editar
                                 producto</a>
                         </div>
-                        <a onclick="deleteProduct('{{$product->reference}}', '{{Auth::user()->workAt}}')"
+                        <a onclick="deleteProduct('{{$product->reference}}', '{{Auth::user()->workAt}}', '{{Auth::user()->rol}}')"
                             class="btn btn-danger">Eliminar producto</a>
                     </div>
                 </div>

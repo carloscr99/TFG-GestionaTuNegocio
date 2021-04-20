@@ -116,48 +116,61 @@ function deleteImageProduct($cifEmpresa, $referenciaProducto) {
 
 }
 
-function deleteEmployer($dni, $rol) {
+function deleteEmployer($dni, $rol, $rolLogeado, ) {
 
-    if($rol === 'propietario'){
+    if($rolLogeado == 'trabajador'){
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'No puedes eliminar al propietario!',
+            text: 'No tienes permisos para hacer esto...',
             
           })
     }else{
-        var route = "EmployerDelete/";
 
-        Swal.fire({
-                title: '¿Estás seguro?',
-                text: "No es posible deshacer esta función!\n Vas a eliminar el empleado con DNI: " + $dni,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: 'DELETE',
-                        url: route + $dni,
-                        data: { "_token": $("meta[name='csrf-token']").attr("content") },
-                        success: function (data) {
-                            Swal.fire(
-                                'Eliminado!',
-                                'Producto eliminado correctamente',
-                                'success'
-                            ).then(function () {
-                                window.location = "Employers";
-                            });
-                        }
-                    });
-        
-        
-                }
-            })
+        if($rol === 'propietario'){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No puedes eliminar al propietario!',
+                
+              })
+        }else{
+            var route = "EmployerDelete/";
+    
+            Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "No es posible deshacer esta función!\n Vas a eliminar el empleado con DNI: " + $dni,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: route + $dni,
+                            data: { "_token": $("meta[name='csrf-token']").attr("content") },
+                            success: function (data) {
+                                Swal.fire(
+                                    'Eliminado!',
+                                    'Producto eliminado correctamente',
+                                    'success'
+                                ).then(function () {
+                                    window.location = "Employers";
+                                });
+                            }
+                        });
+            
+            
+                    }
+                })
+        }
+
     }
+
+    
 
 }
 
