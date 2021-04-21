@@ -170,8 +170,6 @@ function deleteEmployer($dni, $rol, $rolLogeado, ) {
 
     }
 
-    
-
 }
 
 function autorizadoCreateProducto($rol){
@@ -192,6 +190,26 @@ function autorizadoCreateProducto($rol){
     }
 
  
+}
+
+function autorizadoCreateEmployer($rol){
+
+    if($rol === 'trabajador'  || $rol == 'encargado'){
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No tienes permisos para hacer esto...',
+            
+          })
+
+    }else{
+        
+        window.location = "NewEmployer";
+
+    }
+
+
 }
 
 

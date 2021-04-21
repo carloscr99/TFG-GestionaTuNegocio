@@ -51,4 +51,7 @@ Route::post('/ProductEdit/{product?}', [App\Http\Controllers\ProductController::
 
 Route::delete('/ProductDelete/{product?}', [App\Http\Controllers\ProductController::class, 'delete']);
 
+Route::get('/shops', [App\Http\Controllers\ShopController::class, 'index'])->name('shops');
+
+Route::get('/shop/{cif?}', [App\Http\Controllers\ShopController::class, 'openEdit'])->name('shop');
 

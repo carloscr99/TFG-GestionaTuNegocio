@@ -16,11 +16,9 @@
                             </p>
                         </div>
                         <div class="card-footer">
-                        @if(\Auth::user()->rol == 'trabajador')
-                        <a class="btn btn-primary-disabled">Añadir empleado</a>
-                        @else
-                        <a href="{{ route('NewEmployer') }}" class="btn btn-primary">Añadir empleado</a>
-                        @endif
+                      
+                        <a onClick="autorizadoCreateEmployer('{{ Auth::user()->rol }}')" class="btn btn-primary">Añadir empleado</a>
+                       
 
                         </div>
                     </div>
@@ -40,6 +38,8 @@
                         @if((\Auth::user()->rol == 'trabajador') && Auth::user()->dni == $employer->dni)
                             <a href={{ route('EmployerEdit', [$employer->dni])}} class="btn btn-primary">Editar empleado</a>
 
+                        @elseif(\Auth::user()->rol == 'propietario' || Auth::user()->rol == 'encargado')
+                        <a href={{ route('EmployerEdit', [$employer->dni])}} class="btn btn-primary">Editar empleado</a>
                         @else
                         <a class="btn btn-primary-disabled">Editar empleado</a>
                         @endif

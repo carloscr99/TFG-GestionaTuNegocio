@@ -112,6 +112,12 @@
                                     {{ __('Empleados') }}
                                 </a>
                                 <hr>
+                                @if(\Auth::user()->rol == 'propietario')
+                                <a class="dropdown-item" href={{ route('shop', [Auth::user()->workAt]) }}>
+                                    {{ __('Tienda') }}
+                                </a>
+                                <hr>
+                                @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
