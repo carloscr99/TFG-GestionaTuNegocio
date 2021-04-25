@@ -21,7 +21,7 @@ Route::get('/', function () {
 
     return view('welcome');
     
-});
+})->name('welcome');
 
 // Route::resource('NewEmployer', 'EmployerController');
 
@@ -54,4 +54,11 @@ Route::delete('/ProductDelete/{product?}', [App\Http\Controllers\ProductControll
 Route::get('/shops', [App\Http\Controllers\ShopController::class, 'index'])->name('shops');
 
 Route::get('/shop/{cif?}', [App\Http\Controllers\ShopController::class, 'openEdit'])->name('shop');
+
+Route::post('/shop/{cif?}', [App\Http\Controllers\ShopController::class, 'edit']);
+
+Route::get('/shopEmail/{cif?}', [App\Http\Controllers\ShopController::class, 'sendEmail'])->name('sendMailDeleteShop');
+
+Route::delete('/shopDelete/{cif?}', [App\Http\Controllers\ShopController::class, 'delete']);
+
 

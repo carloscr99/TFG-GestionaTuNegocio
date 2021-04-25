@@ -60,15 +60,14 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" id="btn-submit" class="btn btn-primary" disabled>
+                                <button type="submit" id="btn-submit" class="btn btn-primary">
                                     {{ __('Editar tienda') }}
                                 </button>
+                                <a onClick="deleteShop('{{ $shop->cif }}')" class="btn btn-danger">
+                                    {{ __('Eliminar tienda') }}
+                                </a>
 
                             </div>
-                        </div>
-                        <br />
-                        <div class="form-group row">
-                            <p>* Este código no se podrá editar una vez guardado el producto</p>
                         </div>
                     </form>
                     @endif
@@ -77,54 +76,4 @@
         </div>
     </div>
 </div>
-<script>
-habilitarBotonNewProduct();
-// Script para subir la imagen a google Firebase
-var imagenASubir = document.getElementById("img-producto");
-var cif = document.getElementById("cif").value;
-console.log(cif);
-
-if (imagenASubir) {
-    imagenASubir.addEventListener('change', function(e) {
-        //Obtenemos la referencia del producto indicada por el usuario
-        var referencia = document.getElementById("reference").value;
-        console.log(referencia);
-        //Obtenemos el fichero
-        var file = e.target.files[0];
-
-        //Creamos la referencia de almacenaje
-        var storageRef = firebase.storage().ref(cif + "/" + referencia);
-
-        //Subimos la imagen
-        var uploadTask = storageRef.put(file);
-
-        uploadTask.on('state_changed', function(snapshot) {
-            // Observe state change events such as progress, pause, and resume
-            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is ' + progress + '% done');
-            switch (snapshot.state) {
-                case firebase.storage.TaskState.PAUSED: // or 'paused'
-                    console.log('Upload is paused');
-                    break;
-                case firebase.storage.TaskState.RUNNING: // or 'running'
-                    console.log('Upload is running');
-                    break;
-            }
-        }, function(error) {
-            // Handle unsuccessful uploads
-        }, function() {
-            // Handle successful uploads on complete
-            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                console.log('File available at', downloadURL);
-                document.getElementById("urlProducto").value = downloadURL;
-
-            });
-        });
-
-
-    });
-}
-</script>
 @endsection

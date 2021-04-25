@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Mail\SendEmailDeleteShop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -10,6 +11,8 @@ use Illuminate\Validation\Rule;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Log;
 
 class ShopController extends Controller
 {
@@ -73,16 +76,10 @@ class ShopController extends Controller
 
         $owner = Auth::user();
 
-        if($request->urlProducto){
-            DB::update("update products set name=?, description=?, price=?, stock=?, urlImagen=? where storedAt=? and reference=?", 
-            [$request->name, $request->description, $request->price, $request->stock, $request->urlProducto, $owner->workAt , $request->reference]);
-        }else{
-            DB::update("update products set name=?, description=?, price=?, stock=? where storedAt=? and reference=?", 
-            [$request->name, $request->description, $request->price, $request->stock, $owner->workAt , $request->reference]);
-        }
-
+            DB::update("update shops set nameShop=?, direction=?, city=?, country=? where cif=?", 
+            [$request->nameShop, $request->direction, $request->city, $request->country, $request->cif]);
      
-        
+      
         return redirect('home');
 
     }
@@ -90,18 +87,29 @@ class ShopController extends Controller
     public function openEdit(Request $request, $cif)
     {
 
-
         $shop = DB::table('shops')->where('cif', $cif)->first();
 
         return view('editShop', ['shop' => $shop]);
 
     }
 
-    public function delete(Request $request, $product){
+    public function delete(Request $request, $cif){
 
-        $owner = Auth::user();
 
-        $product = DB::table('products')->where('reference', $product)->where('storedAt', $owner->workAt)->delete();
+         DB::table('shops')->where('cif', $cif)->delete();
+         DB::table('products')->where('storedAt', $cif)->delete();
+         DB::table('users')->where('workAt', $cif)->delete();
+
+         return $this->sendEmail($cif);
 
     }
+    
+    public function sendEmail($cif){
+
+        Mail::to('gestionatunegocioccr@gmail.com')->queue(new SendEmailDeleteShop($cif));
+
+        Auth::logout();
+
+    }
+
 }

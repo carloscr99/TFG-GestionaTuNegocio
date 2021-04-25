@@ -36,16 +36,16 @@ function habilitarBotonNewProduct() {
 
 function deleteProduct($referenciaProducto, $cifEmpresa, $rol) {
 
-    if($rol === 'trabajador'){
+    if ($rol === 'trabajador') {
 
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'No tienes permisos para hacer esto...',
-            
-          })
 
-    }else{
+        })
+
+    } else {
 
         var route = "ProductDelete/";
 
@@ -75,140 +75,158 @@ function deleteProduct($referenciaProducto, $cifEmpresa, $rol) {
                         });
                     }
                 });
-    
-    
+
+
             }
         })
 
     }
 
-  
+
 
 }
 
 function deleteImageProduct($cifEmpresa, $referenciaProducto) {
 
-   
+    var storage = firebase.storage();
 
-        var storage = firebase.storage();
+    var storageRef = storage.ref();
 
-        var storageRef = storage.ref();
-    
-        // Create a reference to the file to delete
-        var desertRef = storageRef.child($cifEmpresa + '/'+ $referenciaProducto);
-    
-        // Delete the file
-        desertRef.delete().then(function () {
-            // File deleted successfully
-          
-        }).catch(function (error) {
-            // Uh-oh, an error occurred!
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'No se ha podido eliminar la imagen del producto de la base de datos.',
-              }).then(function () {
-                window.location = "home";
-            });
+    // Create a reference to the file to delete
+    var desertRef = storageRef.child($cifEmpresa + '/' + $referenciaProducto);
+
+    // Delete the file
+    desertRef.delete().then(function () {
+        // File deleted successfully
+
+    }).catch(function (error) {
+        // Uh-oh, an error occurred!
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No se ha podido eliminar la imagen del producto de la base de datos.',
+        }).then(function () {
+            window.location = "home";
         });
-
-
+    });
 
 }
 
-function deleteEmployer($dni, $rol, $rolLogeado, ) {
+function deleteEmployer($dni, $rol, $rolLogeado,) {
 
-    if($rolLogeado == 'trabajador'){
+    if ($rolLogeado == 'trabajador') {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'No tienes permisos para hacer esto...',
-            
-          })
-    }else{
 
-        if($rol === 'propietario'){
+        })
+    } else {
+
+        if ($rol === 'propietario') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'No puedes eliminar al propietario!',
-                
-              })
-        }else{
+
+            })
+        } else {
             var route = "EmployerDelete/";
-    
+
             Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: "No es posible deshacer esta función!\n Vas a eliminar el empleado con DNI: " + $dni,
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, eliminar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            type: 'DELETE',
-                            url: route + $dni,
-                            data: { "_token": $("meta[name='csrf-token']").attr("content") },
-                            success: function (data) {
-                                Swal.fire(
-                                    'Eliminado!',
-                                    'Producto eliminado correctamente',
-                                    'success'
-                                ).then(function () {
-                                    window.location = "Employers";
-                                });
-                            }
-                        });
-            
-            
-                    }
-                })
+                title: '¿Estás seguro?',
+                text: "No es posible deshacer esta función!\n Vas a eliminar el empleado con DNI: " + $dni,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: route + $dni,
+                        data: { "_token": $("meta[name='csrf-token']").attr("content") },
+                        success: function (data) {
+                            Swal.fire(
+                                'Eliminado!',
+                                'Producto eliminado correctamente ',
+                                'success'
+                            ).then(function () {
+                                window.location = "Employers";
+                            });
+                        }
+                    });
+                }
+            })
         }
-
     }
+}
+
+function deleteShop($cif) {
+
+    var route = "../shopDelete/";
+
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Esta opción no tiene vuelta atrás!\nEstás apunto de eliminar tu tienda con cif: "+ $cif,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, estoy seguro!',
+        cancelButtonText: 'No estoy seguro!'
+      }).then((result) => {
+        $.ajax({
+            type: 'DELETE',
+            url: route + $cif,
+            data: { "_token": $("meta[name='csrf-token']").attr("content") },
+            success: function (data) {
+
+              window.location = 'welcome';
+
+            }
+        });
+      })
 
 }
 
-function autorizadoCreateProducto($rol){
 
-    if($rol === 'trabajador'){
+function autorizadoCreateProducto($rol) {
+
+    if ($rol === 'trabajador') {
 
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'No tienes permisos para hacer esto...',
-            
-          })
 
-    }else{
-        
+        })
+
+    } else {
+
         window.location = "NewProduct";
-
     }
 
- 
 }
 
-function autorizadoCreateEmployer($rol){
+function autorizadoCreateEmployer($rol) {
 
-    if($rol === 'trabajador'  || $rol == 'encargado'){
+    if ($rol === 'trabajador' || $rol == 'encargado') {
 
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'No tienes permisos para hacer esto...',
-            
-          })
 
-    }else{
-        
+        })
+
+    } else {
+
         window.location = "NewEmployer";
 
     }
-
 
 }
 
