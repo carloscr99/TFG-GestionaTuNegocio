@@ -38,7 +38,9 @@ class ShopController extends Controller
     public function index()
     {
 
-        return view('Shop');
+        $shops = DB::table('shops')->get();
+
+        return view('shops', ['shops' => $shops]);
     }
 
     public function create(Request $request)
