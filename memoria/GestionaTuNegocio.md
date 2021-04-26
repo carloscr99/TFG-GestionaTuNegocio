@@ -63,7 +63,7 @@ TODO: INSERTAR IMAGEN AQUÍ
 - Req. a: Un usuario anónimo solo tendrá acceso a la vista de *welcome*.\
 En esta vista, solo habrá el manual de como se usa nuestra aplicación, así como a las opciones de menú de Registro y Login.
 
-- Req. b: Un usuario anónimo puede registrarse en la aplicación como usuario propietario de un nuevo negocio. Introducirá esta informacion:
+- Req. b: Un usuario anónimo puede registrarse en la aplicación como usuario propietario de un nuevo negocio. Introducirá esta información:
    - Datos personales:
      - Nombre
      - DNI
@@ -84,29 +84,41 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
   - Rol
   - Contraseña
 
-- Req. d: El usuario propietario puede modificar cualquier campos de un usuario salvo el campo DNI.
+- Req. d: El usuario propietario puede modificar cualquier campo de un usuario salvo el campo DNI.
 - Req. e: El usuario propietario puede borrar cualquier otro usuario.
 - Req. f: El usuario propietario puede dar de baja su cuenta junto con toda la información de su negocio (usuarios, productos y la propia tienda).
-- Req. g: El usuario proietario puede crear productos. Para cada uno de ellos, se incorporará la siguiente información:
+- Req. g: El usuario propietario  puede crear productos. Para cada uno de ellos, se incorporará la siguiente información:
     - Nombre
     - Descripción
     - Precio
     - Stock disponible
-    - Código de referéncia (No modificado a posteriori).
+    - Código de referencia (No modificable a posteriori).
     - Imagen del producto
 
-- Req. e: El usuario encargado puede crear productos....
-- Req. e: El usuario encargado puede ....
+- Req. h: El usuario propietario puede eliminar la tienda, con toda la información.
+- Req. e: El usuario encargado puede crear productos, con los mismos datos que proporciona el usuario propietario.
+- Req. e: El usuario encargado puede eliminar productos.
+- Req. e: El usuario encargado puede editar los trabajadores.
+- Req. e: El usuario encargado puede eliminar trabajadores.
+- Req. x: El usuario trabajador puede modificar el stock y el precio de los productos.
+- Req. x: El usuario trabajador puede modificar sus datos de usuario.
 
+TODO: Anyadir els requisits del superUsuari
 
-- Req. x: El usuario trabajador solo puede hacer lo que describen los requisitos tal y pascual.
-- Req. y: El usuario propietario puede hacer todo lo que puede hacer un usuario encargado.
 
 ## 4. Diseño
 
 ## 5. Implementación
 
 ## x. Despliegue
+
+Para realizar el despliegue de la aplicación, primero de todo probé en host gratuitos, como hostinger, pero la transferencia de ficheros, que se realiza mediante protocolo FTP, era muy lento, por lo que opté a adquirir un servidor en IONOS.\
+En este caso, la transferencia de archivos era mucho más rápida, pero a la hora de realizar la implementación, llegaron los problemas, por ejemplo:
+ - Problemas a la hora de visualizar la página web, dado que poniendo el dominio, simplemente mostraba la página de inicio por defecto, y no lo que había en la carpeta /public, que es de donde parte Laravel.
+ - Modifiqué donde apuntaba la raiz del directorio, para poder visualizar la página web.
+ - Investigué como crear un fichero .htaccess, que estructura tenía que tener, y que poner, para que obtuviera los recursos (css, imágenes...) de la web, y no la mostrara como texto plano.
+ - Finalmente no conseguí que funcionara la parte de las rutas de Laravel en el servidor, ya que el framework, tiene hace unas rutas, para llamar a un fichero....
+ TODO: Acabar este últim punt
 
 ## x. Pruebas
 
@@ -117,15 +129,25 @@ Mejor, además: plan pruebas.
 ## x. Integración de los módulos del ciclo
 
 - 1º Programación
-  - Blah.
+  - De lenguajes de programación, para crear la app se ha usado PHP, bajo el framework de Laravel.
 - 1º BBDD
+  - Para almacenar la información de la aplicación, se ha utilizado la base de datos de MariaDB, en su versión 10.4.14, con el motor de vista web PHPMyAdmin.
+  - Para almacenar las imágenes, se ha utilizado la función Storage, de Google Firebase, la cual nos permite almacenar archivos en su sistemas, con los límites gratuitos que he explicado anteriormente. 
 - 1º Entornos de desarrollo
+  - De este módulo, he utilizado el desarrollo de las pruebas del software, para realizar las pruebas de mi aplicación, para ver que todo funcione correctamente.\
+   En este caso, han sido pruebas de caja negra.
 - 1º Lenguaje de Marcas y Sistemas de la gestión de la información
+  - En este caso, ha utilizado los conocimientos adquiridos con dicho módulo con HTML, para crear mi web.
 - 1º Sistemas informáticos
+  - Para el despliegue  de la web en un servidor, he hecho uso de estos conocimientos con linux, ya que era la manera con la que he interactuado con el sistema de AWS.
 - 2º Desarrollo Web en entorno cliente
+  - Para la aplicación de funcionalidad JS en este proyecto, conocimientos y recursos adquiridos en este módulo, ha servido de gran ayuda.
 - 2º Desarrollo Web en entorno servidor
+TODO
 - 2º Despliegue  de aplicaciones web
-- 2º Diseño de interficies Web
+  - En este módulo, se nos enseñó a como realizar  el despliegue de aplicaciones web, y estos conocimientos han sido de ayuda a la hora de saber como debía de instalar Laravel en mi equipo.
+- 2º Diseño de interfaces Web
+  - Me ha servido de ayuda el conocimiento adquirido en este curso para saber a como organizar la vista de los productos y de los empleados en formato Flexbox, así como la creación del CSS.
 
 
 ## 7. Conclusiones
