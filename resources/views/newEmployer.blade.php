@@ -13,6 +13,9 @@
                 <div class="card-body">
                     <form method="POST" action="EditEmployer">
                         @csrf
+                        @if($employer->restablished)
+                        <p>Su contraseña ha sido restablecida, por favor, cambiela primero.</p>
+                        @endif
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre ') }}</label>
@@ -37,6 +40,22 @@
                                     name="dni" value="{{ $employer->dni }}" required autocomplete="dni" readonly>
 
                                 @error('dni')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="workAt"
+                                class="col-md-4 col-form-label text-md-right">{{ __('CIF empresa') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="workAt" type="text"
+                                    class="form-control @error('workAt') is-invalid @enderror" name="workAt"
+                                    value="{{ $employer->workAt }}" required autocomplete="workAt" readonly>
+
+                                @error('workAt')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -83,10 +102,10 @@
                                     <option> Seleciona su rol</option>
                                     <option value="trabajador" {{$employer->rol == 'trabajador' ? 'selected' : ''}}>
                                         Trabajador</option>
-                                    <option value="encargado" {{$employer->rol == 'encargado' ? 'selected' : ''}}>Encargado
+                                    <option value="encargado" {{$employer->rol == 'encargado' ? 'selected' : ''}}>
+                                        Encargado
                                     </option>
-
-                                </select>
+                                </select>         
                             </div>
                         </div>
 
@@ -122,9 +141,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Modificar empleado') }}
                                 </button>
-                                <a class="btn btn-link" href="{{ route('home') }}">
-                                    {{ __('No tengo mas empleados que añadir') }}
-                                </a>
                             </div>
                         </div>
                     </form>

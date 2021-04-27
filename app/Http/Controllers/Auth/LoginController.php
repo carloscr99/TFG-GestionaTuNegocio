@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -30,13 +31,22 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo()
     {
-        if(Auth::user()->rol == 'superadmin'){
+
+        $user = Auth::user();
+
+        if($user->rol == 'superadmin'){
 
             return '/shops';
     
-        }else {
-            return '/home';
+        }else if($user->restablished == 1) {
+
+            
+            $employer = DB::table('users')->where('dni', $user->dni)->first();
+
+         return '/EmployerEdit/'.$employer->dni;
     
+        }else{
+            return '/home';
         }
     }
 

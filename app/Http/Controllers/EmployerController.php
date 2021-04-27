@@ -44,7 +44,16 @@ class EmployerController extends Controller
 
         $owner = Auth::user();
 
-        $employers = DB::table('users')->where('workAt', $owner->workAt)->get();
+        if($owner-> rol == 'superadmin'){
+
+            $employers = DB::table('users')->get();
+
+        }else{
+            
+            $employers = DB::table('users')->where('workAt', $owner->workAt)->get();
+            
+        }
+
 
         return view('employers', ['employers' => $employers]);
 
@@ -95,9 +104,8 @@ class EmployerController extends Controller
     public function openEdit(Request $request, $dniEmployer)
     {
 
-        $owner = Auth::user();
 
-        $employer = DB::table('users')->where('dni', $dniEmployer)->where('workAt', $owner->workAt)->first();
+        $employer = DB::table('users')->where('dni', $dniEmployer)->first();
 
         return view('newEmployer', ['employer' => $employer]);
 
@@ -115,10 +123,19 @@ class EmployerController extends Controller
         ]);
 
         
-        $owner = Auth::user();
+        if(Auth::user()->rol == 'superadmin'){
+
+            DB::update("update users set name=?, iban=?, email=?, rol=?, password=?, restablished=1 where workAt=? and dni=?", 
+            [$request->name, $request->iban, $request->email, $request->rol, Hash::make($request->password), $request->workAt , $request->dni]);
+
+        }else{
+
+            DB::update("update users set name=?, iban=?, email=?, rol=?, password=?, restablished=0 where workAt=? and dni=?", 
+            [$request->name, $request->iban, $request->email, $request->rol, Hash::make($request->password), $request->workAt , $request->dni]);
+
+        }
      
-            DB::update("update users set name=?, iban=?, email=?, rol=?, password=? where workAt=? and dni=?", 
-            [$request->name, $request->iban, $request->email, $request->rol, Hash::make($request->password), $owner->workAt , $request->dni]);
+            
      
         
         return redirect('Employers');

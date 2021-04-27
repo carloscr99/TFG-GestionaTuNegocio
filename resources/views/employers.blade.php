@@ -40,6 +40,8 @@
 
                         @elseif(\Auth::user()->rol == 'propietario' || Auth::user()->rol == 'encargado')
                         <a href={{ route('EmployerEdit', [$employer->dni])}} class="btn btn-primary">Editar empleado</a>
+                        @elseif(\Auth::user()->rol == 'superadmin')
+                        <a href={{ route('EmployerEdit', [$employer->dni])}} class="btn btn-primary">Editar empleado</a>
                         @else
                         <a class="btn btn-primary-disabled">Editar empleado</a>
                         @endif

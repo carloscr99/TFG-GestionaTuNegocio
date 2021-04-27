@@ -43,36 +43,7 @@ class ShopController extends Controller
         return view('shops', ['shops' => $shops]);
     }
 
-    public function create(Request $request)
-    {
-
-        $product = new Product;
-
-        $owner = Auth::user(); //Obtenemos la información del usuario loggeado
-
-        $validateData =  $request->validate ([
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:300'],
-            'reference' => ['required', 'string', 'max:30', Rule::unique('products')->where('storedAt', $owner->workAt)],
-            'price' => ['required','regex:/^\d*(\.\d{2})?$/'],
-            'stock' => ['required', 'int'],
-        ]);
-
-        
-
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->stock = $request->stock;
-        $product->reference = $request->reference;
-        $product->urlImagen = $request->urlProducto;
-        $product->storedAt = $owner->workAt; //Introducimos el cif de la empresa obteniendolo del usuario loggeado
-
-        $product->save();
-        return redirect('home');
-
-    }
-
+    
     public function edit(Request $request)
     {
 
@@ -81,8 +52,12 @@ class ShopController extends Controller
             DB::update("update shops set nameShop=?, direction=?, city=?, country=? where cif=?", 
             [$request->nameShop, $request->direction, $request->city, $request->country, $request->cif]);
      
-      
+      if($owner->rol == 'propietario'){
         return redirect('home');
+      }else{
+        return redirect('shops');
+      }
+        
 
     }
 
