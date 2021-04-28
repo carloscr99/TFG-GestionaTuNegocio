@@ -61,4 +61,8 @@ Route::get('/shopEmail/{cif?}', [App\Http\Controllers\ShopController::class, 'se
 
 Route::delete('/shopDelete/{cif?}', [App\Http\Controllers\ShopController::class, 'delete']);
 
+Route::get('/resetPassword', [App\Http\Controllers\PasswordController::class, 'index'])->name('newPassword');
+
+ Route::post('resetPassword', [App\Http\Controllers\PasswordController::class, 'resetPassword'])->name('resetPassword');
+
 

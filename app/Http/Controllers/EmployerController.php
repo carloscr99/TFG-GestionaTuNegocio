@@ -134,9 +134,6 @@ class EmployerController extends Controller
             [$request->name, $request->iban, $request->email, $request->rol, Hash::make($request->password), $request->workAt , $request->dni]);
 
         }
-     
-            
-     
         
         return redirect('Employers');
 
@@ -149,4 +146,6 @@ class EmployerController extends Controller
         $product = DB::table('users')->where('dni', $employer)->where('workAt', $owner->workAt)->delete();
 
     }
+
+  
 }

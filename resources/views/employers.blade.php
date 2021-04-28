@@ -31,13 +31,13 @@
                         <img class="card-img-top" src="https://via.placeholder.com/300x200" alt="">
                         <div class="card-body">
                             <h4 class="card-title">{{$employer->name}}</h4>
+                            <p class="card-text">{{$employer->workAt}}</p>
                             <p class="card-text">{{$employer->email}}</p>
                             <p class="card-text">{{$employer->rol}}</p>
                         </div>
                         <div class="card-footer">
                         @if((\Auth::user()->rol == 'trabajador') && Auth::user()->dni == $employer->dni)
                             <a href={{ route('EmployerEdit', [$employer->dni])}} class="btn btn-primary">Editar empleado</a>
-
                         @elseif(\Auth::user()->rol == 'propietario' || Auth::user()->rol == 'encargado')
                         <a href={{ route('EmployerEdit', [$employer->dni])}} class="btn btn-primary">Editar empleado</a>
                         @elseif(\Auth::user()->rol == 'superadmin')

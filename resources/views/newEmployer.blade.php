@@ -262,7 +262,7 @@
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Añadir empleado') }}
                             </button>
-                            <a class="btn btn-link" href="{{ route('home') }}">
+                            <a class="btn btn-link" href="{{ route('employers') }}">
                                 {{ __('No tengo mas empleados que añadir') }}
                             </a>
                         </div>

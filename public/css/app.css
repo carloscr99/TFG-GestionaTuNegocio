@@ -10131,6 +10131,14 @@ font-size: 3rem;
 
 }
 
+.error-message{
+  color: #e3342f;
+  font-weight: bold;
+  padding: 0.75rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
 /* Menú hamburgesa */
 
 @media screen and (max-width:1200px){
