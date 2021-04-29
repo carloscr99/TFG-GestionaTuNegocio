@@ -43,7 +43,7 @@ class LoginController extends Controller
             
             $employer = DB::table('users')->where('dni', $user->dni)->first();
 
-         return '/EmployerEdit/'.$employer->dni;
+         return '/userChangePassword/'.$employer->dni;
     
         }else{
             return '/home';

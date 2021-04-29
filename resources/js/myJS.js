@@ -114,7 +114,7 @@ function deleteImageProduct($cifEmpresa, $referenciaProducto) {
 
 function deleteEmployer($dni, $rol, $rolLogeado,) {
 
-    if ($rolLogeado == 'trabajador') {
+    if ($rolLogeado == 'trabajador'|| $rolLogeado === 'encargado' ) {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',

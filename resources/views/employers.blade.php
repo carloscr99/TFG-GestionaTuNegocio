@@ -31,7 +31,7 @@
                         <img class="card-img-top" src="https://via.placeholder.com/300x200" alt="">
                         <div class="card-body">
                             <h4 class="card-title">{{$employer->name}}</h4>
-                            <p class="card-text">{{$employer->workAt}}</p>
+                            <p class="card-text">{{$employer->dni}}</p>
                             <p class="card-text">{{$employer->email}}</p>
                             <p class="card-text">{{$employer->rol}}</p>
                         </div>

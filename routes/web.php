@@ -60,9 +60,12 @@ Route::post('/shop/{cif?}', [App\Http\Controllers\ShopController::class, 'edit']
 Route::get('/shopEmail/{cif?}', [App\Http\Controllers\ShopController::class, 'sendEmail'])->name('sendMailDeleteShop');
 
 Route::delete('/shopDelete/{cif?}', [App\Http\Controllers\ShopController::class, 'delete']);
-
+//Ventana donde pide el dni
 Route::get('/resetPassword', [App\Http\Controllers\PasswordController::class, 'index'])->name('newPassword');
-
- Route::post('resetPassword', [App\Http\Controllers\PasswordController::class, 'resetPassword'])->name('resetPassword');
-
+//Enviamos el mail con la nueva contraseña
+Route::post('resetPassword', [App\Http\Controllers\PasswordController::class, 'resetPassword'])->name('resetPassword');
+//Mostramos la vista para que cambie su contraseña
+Route::get('/userChangePassword/{employer?}', [App\Http\Controllers\PasswordController::class, 'openChangePassword']);
+//Actualizamos la contraseña al usuario
+Route::post('/userChangePassword/{employer?}', [App\Http\Controllers\PasswordController::class, 'changePassword']);
 

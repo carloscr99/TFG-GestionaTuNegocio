@@ -11,17 +11,17 @@ class sendEmailRequestRestorePassword extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject = 'UEGENTE: Petición de restablecimiento de contraseña';
-    public $cif;
+    public $subject = 'IMPORTANTE: Petición de restablecimiento de contraseña';
+    public $newPassword;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($cif)
+    public function __construct($newPassword)
     {
-        $this->cif = $cif;
+        $this->newPassword = $newPassword;
     }
 
     /**
