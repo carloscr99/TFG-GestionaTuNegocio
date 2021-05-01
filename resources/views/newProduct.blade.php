@@ -41,14 +41,15 @@
 
                             <div class="col-md-6">
                             @if(\Auth::user()->rol == 'trabajador')
-                                <textarea id="description" type="description"
+                                <textarea id="description" type="description" maxlength = "300"
                                     class="form-control @error('description') is-invalid @enderror" name="description"
                                     required autocomplete="description" readonly>{{ $product->description }}</textarea>
                             @else
 
-                            <textarea id="description" type="description"
+                            <textarea id="description" type="description" maxlength = "300"
                                     class="form-control @error('description') is-invalid @enderror" name="description"
                                     required autocomplete="description">{{ $product->description }}</textarea>
+                                    <p id="numberCharacters" class="numberCharacters">0/300</p>
 
                             @endif
 
@@ -183,9 +184,10 @@ echo "<input id='cif' type='text' value='$cifEmpresa' hidden/>"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Descripción:') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="description" type="description"
+                                <textarea id="description" type="description" maxlength = "300"
                                     class="form-control @error('description') is-invalid @enderror" name="description"
                                     required autocomplete="description">{{ old('description') }}</textarea>
+                                    <p id="numberCharacters" class="numberCharacters">0/300</p>
 
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">
@@ -285,6 +287,7 @@ echo "<input id='cif' type='text' value='$cifEmpresa' hidden/>"
 </div>
 <script>
 habilitarBotonNewProduct();
+countCharacters();
 // Script para subir la imagen a google Firebase
 var imagenASubir = document.getElementById("img-producto");
 var cif = document.getElementById("cif").value;

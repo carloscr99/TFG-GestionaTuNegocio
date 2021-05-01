@@ -116,23 +116,40 @@ class EmployerController extends Controller
 
         $validateData =  $request->validate ([
             'name' => ['required', 'string', 'max:255'],
-            'iban' => ['string', 'max:26', 'regex:/ES\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}|ES\d{22}/i'],
+            'iban' => ['nullable','string', 'max:26', 'regex:/ES\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}|ES\d{22}/i'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'rol' => ['required', 'string', 'max:255'],
+            'rol' => ['string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         
         if(Auth::user()->rol == 'superadmin'){
+            
+            if($request->rol === 'Seleciona su rol'){
+                DB::update("update users set name=?, iban=?, email=?, password=?, restablished=1 where workAt=? and dni=?", 
+                [$request->name, $request->iban, $request->email, Hash::make($request->password), $request->workAt , $request->dni]);
+            }else{
+                DB::update("update users set name=?, iban=?, email=?, rol=?, password=?, restablished=1 where workAt=? and dni=?", 
+                [$request->name, $request->iban, $request->email, $request->rol, Hash::make($request->password), $request->workAt , $request->dni]);
+            }
 
-            DB::update("update users set name=?, iban=?, email=?, rol=?, password=?, restablished=1 where workAt=? and dni=?", 
-            [$request->name, $request->iban, $request->email, $request->rol, Hash::make($request->password), $request->workAt , $request->dni]);
+           
 
         }else{
 
-            DB::update("update users set name=?, iban=?, email=?, rol=?, password=?, restablished=0 where workAt=? and dni=?", 
-            [$request->name, $request->iban, $request->email, $request->rol, Hash::make($request->password), $request->workAt , $request->dni]);
+            if($request->rol === 'Seleciona su rol'){
 
+                DB::update("update users set name=?, iban=?, email=?, password=?, restablished=0 where workAt=? and dni=?", 
+                [$request->name, $request->iban, $request->email, Hash::make($request->password), $request->workAt , $request->dni]);
+    
+            } else{
+
+                DB::update("update users set name=?, iban=?, email=?, rol=?, password=?, restablished=0 where workAt=? and dni=?", 
+                [$request->name, $request->iban, $request->email, $request->rol, Hash::make($request->password), $request->workAt , $request->dni]);
+    
+
+            }
+           
         }
         
         return redirect('Employers');

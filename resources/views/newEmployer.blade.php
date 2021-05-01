@@ -69,7 +69,7 @@
 
                             <div class="col-md-6">
                                 <input id="iban" type="text" class="form-control @error('iban') is-invalid @enderror"
-                                    name="iban" value="{{ $employer->iban }}" required autocomplete="iban" autofocus>
+                                    name="iban" value="{{ $employer->iban }}" autocomplete="iban" autofocus>
 
                                 @error('iban')
                                 <span class="invalid-feedback" role="alert">

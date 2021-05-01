@@ -29,8 +29,9 @@
                         <img class="card-img-top" src={{$product->urlImagen}} alt="">
                         <div class="card-body">
                             <h4 class="card-title">{{$product->name}}</h4>
-                            <p class="card-text">{{$product->description}}
-                            </p>
+                            <p class="card-text">{{$product->reference}}</p>
+                            <p class="card-text">{{$product->description}}</p>
+
                         </div>
                         <div class="card-footer">
                             <a href={{route('ProductEdit', [$product->reference])}} class="btn btn-primary">Editar

@@ -62,10 +62,17 @@
     <div id="app">
         <nav class="navbar navbar-expand-md shadow-sm">
             <div class="container">
-            
+
+            @auth
             <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('Gestiona tu negocio', 'Gestiona tu negocio') }}
                 </a>
+            @endauth
+            @guest
+            <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('Gestiona tu negocio', 'Gestiona tu negocio') }}
+                </a>
+            @endguest
 
                 <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

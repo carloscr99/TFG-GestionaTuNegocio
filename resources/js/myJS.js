@@ -34,6 +34,26 @@ function habilitarBotonNewProduct() {
 
 }
 
+function countCharacters(){
+    console.log("countCharacters");
+    
+    var textArea = document.getElementById("description");
+
+    window.addEventListener('load', function(e){
+
+        document.getElementById("numberCharacters").innerText = textArea.value.length + "/300";
+       
+
+    });
+
+    textArea.addEventListener('input', function(e){
+
+        document.getElementById("numberCharacters").innerText = textArea.value.length + "/300";
+       
+
+    });
+}
+
 function deleteProduct($referenciaProducto, $cifEmpresa, $rol) {
 
     if ($rol === 'trabajador') {
