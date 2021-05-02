@@ -63,16 +63,16 @@
         <nav class="navbar navbar-expand-md shadow-sm">
             <div class="container">
 
-            @auth
-            <a class="navbar-brand" href="{{ url('/home') }}">
+                @auth
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('Gestiona tu negocio', 'Gestiona tu negocio') }}
                 </a>
-            @endauth
-            @guest
-            <a class="navbar-brand" href="{{ url('/') }}">
+                @endauth
+                @guest
+                <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('Gestiona tu negocio', 'Gestiona tu negocio') }}
                 </a>
-            @endguest
+                @endguest
 
                 <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -101,6 +101,16 @@
                         @endif
                         @else
                         @if(\Auth::user()->rol == 'superadmin')
+                        <li class="nav-item">
+                            <a class="button" href="{{ route('shops') }}">
+                                {{ __('Tiendas') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="button" href="{{ route('employers') }}">
+                                {{ __('Empleados') }}
+                            </a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -108,14 +118,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('shops') }}">
-                                    {{ __('Tiendas') }}
-                                </a>
-                                <hr>
-                                <a class="dropdown-item" href="{{ route('employers') }}">
-                                    {{ __('Empleados') }}
-                                </a>
-                                <hr>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -146,6 +149,16 @@
                             </div>
                         </li>
                         @else
+                        <li class="nav-item">
+                            <a class="button" href="{{ route('home') }}">
+                                {{ __('Home') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="button" href="{{ route('employers') }}">
+                                {{ __('Empleados') }}
+                            </a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -153,14 +166,6 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('home') }}">
-                                    {{ __('Home') }}
-                                </a>
-                                <hr>
-                                <a class="dropdown-item" href="{{ route('employers') }}">
-                                    {{ __('Empleados') }}
-                                </a>
-                                <hr>
                                 @if(\Auth::user()->rol == 'propietario')
                                 <a class="dropdown-item" href={{ route('shop', [Auth::user()->workAt]) }}>
                                     {{ __('Tienda') }}

@@ -5,11 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
         <div class="card my-4">
-        <h5 class="card-header">Search</h5>
+        <h5 class="card-header">Búsqueda</h5>
         <form class="card-body">
             {{ csrf_field() }}
             <div class="input-group">
-                <input id='search' type="text" class="form-control" placeholder="Search for..." name="q">
+                <input id='search' type="text" class="form-control" placeholder="Quiero buscar..." name="q">
                 <span class="input-group-btn">
           
           </span>
