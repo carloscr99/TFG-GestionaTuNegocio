@@ -5,7 +5,7 @@ function habilitarBotonNewProduct() {
     var imgButton = document.getElementById("img-producto");
     var btnSubmit = document.getElementById("btn-submit");
 
-    referencia.addEventListener('change', function (event) {
+    referencia.addEventListener('input', function (event) {
 
         if (referencia.value === '') {
 
@@ -19,7 +19,7 @@ function habilitarBotonNewProduct() {
     });
 
     if (imgButton) {
-        imgButton.addEventListener('change', function (event) {
+        imgButton.addEventListener('input', function (event) {
 
             if (imgButton.disabled === false || imgButton.value === "") {
                 btnSubmit.disabled = false;
@@ -34,24 +34,70 @@ function habilitarBotonNewProduct() {
 
 }
 
-function countCharacters(){
+function countCharacters() {
     console.log("countCharacters");
-    
+
     var textArea = document.getElementById("description");
 
-    window.addEventListener('load', function(e){
+    window.addEventListener('load', function (e) {
 
         document.getElementById("numberCharacters").innerText = textArea.value.length + "/300";
-       
+
 
     });
 
-    textArea.addEventListener('input', function(e){
+    textArea.addEventListener('input', function (e) {
 
         document.getElementById("numberCharacters").innerText = textArea.value.length + "/300";
-       
+
 
     });
+}
+
+function search($items) {
+
+    const searchBar = document.getElementById('search');
+    searchBar.addEventListener('keyup', (e) => {
+        const busqueda = e.target.value.toLowerCase();
+        const busquedaFiltrada = $items.filter(item => {
+            return item.name.toLowerCase().includes(busqueda) || item.reference.toLowerCase().includes(busqueda)
+        });
+        console.log(busquedaFiltrada);
+        displayFilteredProducts(busquedaFiltrada);
+    });
+
+
+}
+
+function displayFilteredProducts($busquedaFiltrada) {
+
+    const list = document.getElementById("producto");
+
+    const htmlFiltered = $busquedaFiltrada.map(($busquedaFiltrada) => {
+        return `<div class="col-md-5 mb-5">
+        <div class="card h-100">
+            <img class="card-img-top" src="${$busquedaFiltrada.urlImagen}" alt="">
+            <div class="card-body">
+                <h4 class="card-title">${$busquedaFiltrada.name}</h4>
+                <p class="card-text">${$busquedaFiltrada.reference}</p>
+                <p class="card-text">${$busquedaFiltrada.description}
+                </p>
+            </div>
+            <div class="card-footer">
+            <a href="ProductEdit/${$busquedaFiltrada.reference}" class="btn btn-primary">Editar
+            producto</a>
+    </div>
+    <a onclick="deleteProduct('${$busquedaFiltrada.reference}', '{{Auth::user()->workAt}}', '{{Auth::user()->rol}}')"
+        class="btn btn-danger">Eliminar producto</a>
+            </div>
+            </div>
+        </div>`;
+    });
+
+    list.innerHTML = htmlFiltered;
+
+
+
 }
 
 function deleteProduct($referenciaProducto, $cifEmpresa, $rol) {
@@ -134,7 +180,7 @@ function deleteImageProduct($cifEmpresa, $referenciaProducto) {
 
 function deleteEmployer($dni, $rol, $rolLogeado,) {
 
-    if ($rolLogeado == 'trabajador'|| $rolLogeado === 'encargado' ) {
+    if ($rolLogeado == 'trabajador' || $rolLogeado === 'encargado') {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -190,25 +236,25 @@ function deleteShop($cif) {
 
     Swal.fire({
         title: '¿Estás seguro?',
-        text: "Esta opción no tiene vuelta atrás!\nEstás apunto de eliminar tu tienda con cif: "+ $cif,
+        text: "Esta opción no tiene vuelta atrás!\nEstás apunto de eliminar tu tienda con cif: " + $cif,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Si, estoy seguro!',
         cancelButtonText: 'No estoy seguro!'
-      }).then((result) => {
+    }).then((result) => {
         $.ajax({
             type: 'DELETE',
             url: route + $cif,
             data: { "_token": $("meta[name='csrf-token']").attr("content") },
             success: function (data) {
 
-              window.location = 'welcome';
+                window.location = 'welcome';
 
             }
         });
-      })
+    })
 
 }
 
@@ -252,12 +298,12 @@ function autorizadoCreateEmployer($rol) {
 
 function restorePasswordDNINotValid() {
 
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'En DNI que acabas de introducir no es valido',
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'En DNI que acabas de introducir no es valido',
 
-        })
+    })
 
 }
 

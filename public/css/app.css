@@ -4397,7 +4397,10 @@ input[type=button].btn-block {
 }
 
 .card-text:last-child {
-  margin-bottom: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .card-link:hover {

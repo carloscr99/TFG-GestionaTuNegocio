@@ -4,8 +4,20 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+        <div class="card my-4">
+        <h5 class="card-header">Search</h5>
+        <form class="card-body">
+            {{ csrf_field() }}
+            <div class="input-group">
+                <input id='search' type="text" class="form-control" placeholder="Search for..." name="q">
+                <span class="input-group-btn">
+          
+          </span>
+            </div>
+        </form>
+    </div>
 
-            <div class="row">
+            <div id="producto" class="row">
                 <div class="col-md-5 mb-5">
                     <div class="card h-100">
                         <img class="card-img-top" src="https://via.placeholder.com/300x200" alt="">
@@ -23,7 +35,7 @@
                 </div>
 
                 @foreach($products as $product)
-
+                
                 <div class="col-md-5 mb-5">
                     <div class="card h-100">
                         <img class="card-img-top" src={{$product->urlImagen}} alt="">
@@ -45,4 +57,8 @@
             </div>
         </div>
     </div>
+    <script>
+    var items = {!! json_encode($products->toArray()) !!};
+    search(items);
+    </script>
     @endsection
