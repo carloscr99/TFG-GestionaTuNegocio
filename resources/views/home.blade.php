@@ -4,18 +4,32 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-        <div class="card my-4">
-        <h5 class="card-header">Búsqueda</h5>
-        <form class="card-body">
-            {{ csrf_field() }}
-            <div class="input-group">
-                <input id='search' type="text" class="form-control" placeholder="Quiero buscar..." name="q">
-                <span class="input-group-btn">
-          
-          </span>
+            <div class="card my-4">
+                <h5 class="card-header">Búsqueda</h5>
+                <form class="card-body">
+                    {{ csrf_field() }}
+                    <div class="input-group">
+                        <input id='searchProduct' type="text" class="form-control" placeholder="Quiero buscar..."
+                            name="q">
+                        <span class="input-group-btn">
+
+                        </span>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
+            <div class="my-4">
+                <select id="orderBy" name="orderBy" class="btn btn-secondary btn-lg dropdown-toggle">
+                    <option> Por que quieres ordenar?</option>
+                    <option value="precioAscendente">
+                        Precio ascendente</option>
+                    <option value="precioDescendente">Precio descendente
+                    </option>
+                    <option value="nombreAscendente">Nombre ascendente
+                    </option>
+                    <option value="nombreDescendente">Nombre descendente
+                    </option>
+                </select>
+            </div>
 
             <div id="producto" class="row">
                 <div class="col-md-5 mb-5">
@@ -28,14 +42,15 @@
                             </p>
                         </div>
                         <div class="card-footer">
-                        <a onClick="autorizadoCreateProducto('{{ Auth::user()->rol }}')" class="btn btn-primary">Añadir producto</a>
+                            <a onClick="autorizadoCreateProducto('{{ Auth::user()->rol }}')"
+                                class="btn btn-primary">Añadir producto</a>
 
                         </div>
                     </div>
                 </div>
 
                 @foreach($products as $product)
-                
+
                 <div class="col-md-5 mb-5">
                     <div class="card h-100">
                         <img class="card-img-top" src={{$product->urlImagen}} alt="">
@@ -59,6 +74,7 @@
     </div>
     <script>
     var items = {!! json_encode($products->toArray()) !!};
-    search(items);
+    searchProduct(items);
+    orderProducts(items);
     </script>
     @endsection

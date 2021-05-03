@@ -35,7 +35,6 @@ function habilitarBotonNewProduct() {
 }
 
 function countCharacters() {
-    console.log("countCharacters");
 
     var textArea = document.getElementById("description");
 
@@ -43,31 +42,72 @@ function countCharacters() {
 
         document.getElementById("numberCharacters").innerText = textArea.value.length + "/300";
 
-
     });
 
     textArea.addEventListener('input', function (e) {
 
         document.getElementById("numberCharacters").innerText = textArea.value.length + "/300";
 
-
     });
 }
 
-function search($items) {
+function searchProduct($items) {
 
-    const searchBar = document.getElementById('search');
+    const searchBar = document.getElementById('searchProduct');
     searchBar.addEventListener('keyup', (e) => {
         const busqueda = e.target.value.toLowerCase();
         const busquedaFiltrada = $items.filter(item => {
             return item.name.toLowerCase().includes(busqueda) || item.reference.toLowerCase().includes(busqueda)
         });
-        console.log(busquedaFiltrada);
         displayFilteredProducts(busquedaFiltrada);
     });
 
 
 }
+
+function orderProducts($items) {
+
+    const orderBy = document.getElementById('orderBy');
+    var busquedaOrdenada = "";
+    orderBy.addEventListener('change', (e) => {
+        var option = e.target.value;
+        console.log(option);
+
+        switch (option) {
+            case 'precioAscendente':
+               
+                busquedaOrdenada = $items.sort((a,b)=>(a.price > b.price) ? 1 : ((b.price > a.price) ? -1 :0));
+               
+                break;
+            case 'precioDescendente':
+
+                busquedaOrdenada = $items.sort((a,b)=>(a.price < b.price) ? 1 : ((b.price < a.price) ? -1 :0));
+
+                break;
+            case 'nombreAscendente':
+
+                busquedaOrdenada = $items.sort((a,b)=>(a.name > b.name) ? 1 : ((b.name > a.name) ? -1 :0));
+
+                break;
+            case 'nombreDescendente':
+
+                busquedaOrdenada = $items.sort((a,b)=>(a.name < b.name) ? 1 : ((b.name < a.name) ? -1 :0));
+
+
+                break;
+
+
+            default:
+                break;
+        }
+        displayFilteredProducts(busquedaOrdenada);
+    });
+
+    
+
+}
+
+
 
 function displayFilteredProducts($busquedaFiltrada) {
 
@@ -104,12 +144,7 @@ function deleteProduct($referenciaProducto, $cifEmpresa, $rol) {
 
     if ($rol === 'trabajador') {
 
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'No tienes permisos para hacer esto...',
-
-        })
+        errorPermisos();
 
     } else {
 
@@ -148,8 +183,6 @@ function deleteProduct($referenciaProducto, $cifEmpresa, $rol) {
 
     }
 
-
-
 }
 
 function deleteImageProduct($cifEmpresa, $referenciaProducto) {
@@ -181,19 +214,16 @@ function deleteImageProduct($cifEmpresa, $referenciaProducto) {
 function deleteEmployer($dni, $rol, $rolLogeado,) {
 
     if ($rolLogeado == 'trabajador' || $rolLogeado === 'encargado') {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'No tienes permisos para hacer esto...',
 
-        })
+        errorPermisos();
+
     } else {
 
         if ($rol === 'propietario') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'No puedes eliminar al propietario!',
+                text: 'No puedes eliminar al propietario!\n Para eliminarlo, tienes que borrar su tienda.',
 
             })
         } else {
@@ -302,6 +332,17 @@ function restorePasswordDNINotValid() {
         icon: 'error',
         title: 'Oops...',
         text: 'En DNI que acabas de introducir no es valido',
+
+    })
+
+}
+
+function errorPermisos() {
+
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No tienes permisos para hacer esto...',
 
     })
 
