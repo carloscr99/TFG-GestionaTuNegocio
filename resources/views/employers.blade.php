@@ -4,8 +4,32 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+        <div class="card my-4">
+                <h5 class="card-header">Búsqueda</h5>
+                <form class="card-body">
+                    {{ csrf_field() }}
+                    <div class="input-group">
+                        <input id='searchEmployer' type="text" class="form-control" placeholder="Quiero buscar..."
+                            name="q">
+                        <span class="input-group-btn">
 
-            <div class="row">
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <div class="my-4">
+                <select id="orderByEmployers" name="orderBy" class="btn btn-secondary btn-lg dropdown-toggle">
+                    <option> Por que quieres ordenar?</option>
+                    <option value="rol">
+                        Rol</option>
+                    <option value="nombreAscendente">Nombre ascendente
+                    </option>
+                    <option value="nombreDescendente">Nombre descendente
+                    </option>
+                </select>
+            </div>
+
+            <div id='empleado' class="row">
                 <div class="col-md-5 mb-5">
                     <div class="card h-100">
                         <img class="card-img-top" src="https://via.placeholder.com/300x200" alt="">
@@ -57,4 +81,9 @@
             </div>
         </div>
     </div>
+    <script>
+    var items = {!! json_encode($employers->toArray()) !!};
+    searchEmployers(items);
+    orderEmployers(items);
+    </script>
     @endsection

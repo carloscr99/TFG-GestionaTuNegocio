@@ -57,9 +57,24 @@ function searchProduct($items) {
     searchBar.addEventListener('keyup', (e) => {
         const busqueda = e.target.value.toLowerCase();
         const busquedaFiltrada = $items.filter(item => {
-            return item.name.toLowerCase().includes(busqueda) || item.reference.toLowerCase().includes(busqueda)
+            return item.name.toLowerCase().includes(busqueda) || item.reference.toLowerCase().includes(busqueda);
         });
         displayFilteredProducts(busquedaFiltrada);
+    });
+
+
+}
+
+function searchEmployers($items) {
+
+    const searchBar = document.getElementById('searchEmployer');
+    searchBar.addEventListener('keyup', (e) => {
+        const busqueda = e.target.value.toLowerCase();
+        const busquedaFiltrada = $items.filter(item => {
+            return item.name.toLowerCase().includes(busqueda) || item.dni.toLowerCase().includes(busqueda) 
+            || item.rol.toLowerCase().includes(busqueda) || item.email.toLowerCase().includes(busqueda);
+        });
+        displayFilteredEmployers(busquedaFiltrada);
     });
 
 
@@ -93,9 +108,7 @@ function orderProducts($items) {
 
                 busquedaOrdenada = $items.sort((a,b)=>(a.name < b.name) ? 1 : ((b.name < a.name) ? -1 :0));
 
-
                 break;
-
 
             default:
                 break;
@@ -103,7 +116,39 @@ function orderProducts($items) {
         displayFilteredProducts(busquedaOrdenada);
     });
 
-    
+}
+
+function orderEmployers($items) {
+
+    const orderBy = document.getElementById('orderByEmployers');
+    var busquedaOrdenada = "";
+    orderBy.addEventListener('change', (e) => {
+        var option = e.target.value;
+        console.log(option);
+
+        switch (option) {
+            case 'rol':
+               
+                busquedaOrdenada = $items.sort((a,b)=>(a.rol > b.rol) ? 1 : ((b.rol > a.rol) ? -1 :0));
+               
+                break;
+           
+            case 'nombreAscendente':
+
+                busquedaOrdenada = $items.sort((a,b)=>(a.name > b.name) ? 1 : ((b.name > a.name) ? -1 :0));
+
+                break;
+            case 'nombreDescendente':
+
+                busquedaOrdenada = $items.sort((a,b)=>(a.name < b.name) ? 1 : ((b.name < a.name) ? -1 :0));
+
+                break;
+
+            default:
+                break;
+        }
+        displayFilteredEmployers(busquedaOrdenada);
+    });
 
 }
 
@@ -136,7 +181,34 @@ function displayFilteredProducts($busquedaFiltrada) {
 
     list.innerHTML = htmlFiltered;
 
+}
 
+function displayFilteredEmployers($busquedaFiltrada) {
+
+    const list = document.getElementById("empleado");
+
+    const htmlFiltered = $busquedaFiltrada.map(($busquedaFiltrada) => {
+        return `<div class="col-md-5 mb-5">
+        <div class="card h-100">
+            <img class="card-img-top" src="https://via.placeholder.com/300x200" alt="">
+            <div class="card-body">
+                <h4 class="card-title">${$busquedaFiltrada.name}</h4>
+                <p class="card-text">${$busquedaFiltrada.dni}</p>
+                <p class="card-text">${$busquedaFiltrada.email} </p>
+                <p class="card-text">${$busquedaFiltrada.rol} </p>
+            </div>
+            <div class="card-footer">
+            <a href="ProductEdit/${$busquedaFiltrada.reference}" class="btn btn-primary">Editar
+            producto</a>
+    </div>
+    <a onclick="deleteProduct('${$busquedaFiltrada.reference}', '{{Auth::user()->workAt}}', '{{Auth::user()->rol}}')"
+        class="btn btn-danger">Eliminar producto</a>
+            </div>
+            </div>
+        </div>`;
+    });
+
+    list.innerHTML = htmlFiltered;
 
 }
 
