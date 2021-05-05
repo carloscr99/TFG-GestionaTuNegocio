@@ -22,14 +22,15 @@ En esta aplicación web, nos encontramos con una jerarquía de usuarios dentro d
   - **propietario**:\
   Es el encargado de registrar la tienda en el sitio web, con toda la información que esto conlleva (datos personales, cif, dirección...).
 
-    Dicho usuario tendrá todo el control sobre la aplicación, pudiendo hacer un CRUD de usuarios, los cuales serán de rol encargado o trabajador, así como de los productos disponibles en su tienda.
-    Así mismo, podrá eliminar la tienda de nuestra aplicación, cuya acción eliminará todos los datos de nuestra BD.
+    Dicho usuario tendrá todo el control sobre la aplicación, pudiendo hacer realizar la creación, lectura, actualización y borrado de usuarios, los cuales serán de rol encargado o trabajador, así como de los productos disponibles en su tienda.
+    Así mismo, podrá eliminar la tienda de nuestra aplicación, cuya acción eliminará todos los datos de nuestra BD, dicha acción será irreversible, previa notificación.
   - **encargado**:\
-  Este usuario será creado previamente por el propietario, y tendrá permisos para realizar un CRUD de los productos de la tienda.
+  Este usuario será creado previamente por el propietario, y tendrá permisos para realizar la creación, lectura, modificación y borrado de los productos de la tienda.
   - **trabajador**:\
   Este encargado también será creado por el usuario propietario, y dentrá la posibilidad de modificar el stock de los productos de la tienda y del precio, pero no tendrá la posibilidad de crear nuevos, ni de eliminar los existentes.
 
-Todos ellos, se almacenarán en una tabla donde se almacenarán los datos necesarios para ellos, como el nombre, IBAN, email, DNI... Este último será el que se usará como identificador para poder editar y eliminar los usuarios, por lo que tras la inserción, este dato no podrá ser modificado.
+//TODO: mover esto al apartado del diseño
+Todos ellos, se almacenarán en una tabla donde se encontrarán los datos necesarios para la empresa para tener los datos centralizados para ellos, como el nombre, IBAN, email, DNI... Este último será el que se usará como identificador para poder editar y eliminar los usuarios, por lo que tras la inserción, este dato no podrá ser modificado.
 
 Respecto a los productos, estos serán almacenados en una tabla donde los datos que se recogen, serán el nombre, descripción, stock, código de referencia... entre otros. El código de referencia, está indicado en la vista de creación que no se podrá modificar una vez añadido el producto, ya que se usa como identificador a la hora de editar y eliminar los productos.
 
@@ -38,16 +39,6 @@ En esta, tendremos almacenados los datos como el nombre, ubicación, CIF... entr
 
 En mi aplicación he usado **Google Firebase** para almacenar las imágenes de los productos de las tiendas, para así no sobrecargar la carga de la web, dado que las imágenes las obtiene de un servidor externo.\
 De este modo, la carga se realiza más rápida dado que no dependemos del ancho de banda de nuestro proveedor del host.
-
-TODO: esquema global del sistema y los actores.
-- Usuarios
-  - propietario
-  - encargado
-  - trabajador
-- Tiendas
-- Productos
-- Sistema (aplicación)
-- Firebase
 
 
 ## 2. Planificación
@@ -66,28 +57,29 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
 - Req. b: Un usuario anónimo puede registrarse en la aplicación como usuario propietario de un nuevo negocio. Introducirá esta información:
    - Datos personales:
      - Nombre
-     - DNI
-     - Email
-     - Contraseña
+     - DNI (Formato correcto y único)
+     - Email (Formato correcto y único)
+     - Contraseña (Han de coincidir)
   - Datos de la empresa:
      - Nombre
-     - CIF
+     - CIF (Formato correcto y único)
      - Dirección
      - Ciudad
      - País
 
 - Req. c: El usuario propietario puede crear usuarios de tipo encargado y trabajador. Para cada uno de ellos, se tendrá la siguiente información:
   - Nombre
-  - DNI
-  - IBAN
-  - Email
+  - DNI (Formato correcto y único)
+  - IBAN (Formato correcto)
+  - Email (Formato correcto y único)
   - Rol
-  - Contraseña
+  - Contraseña (Han de coincidir)
 
-- Req. d: El usuario propietario puede modificar cualquier campo de un usuario salvo el campo DNI.
-- Req. e: El usuario propietario puede borrar cualquier otro usuario.
-- Req. f: El usuario propietario puede dar de baja su cuenta junto con toda la información de su negocio (usuarios, productos y la propia tienda).
-- Req. g: El usuario propietario  puede crear productos. Para cada uno de ellos, se incorporará la siguiente información:
+- Req. d: El usuario propietario puede listar todos los trabajadores, y ver sus detalles.
+- Req. e: El usuario propietario puede modificar cualquier campo de un usuario, incluido él mismo salvo el campo DNI.
+- Req. f: El usuario propietario puede borrar cualquier otro usuario, excepto a si mismo.
+- Req. g: El usuario propietario puede dar de baja su cuenta junto con toda la información de su negocio (usuarios, productos y la propia tienda).
+- Req. h: El usuario propietario  puede crear productos. Para cada uno de ellos, se incorporará la siguiente información:
     - Nombre
     - Descripción
     - Precio
@@ -95,15 +87,24 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
     - Código de referencia (No modificable a posteriori).
     - Imagen del producto
 
-- Req. h: El usuario propietario puede eliminar la tienda, con toda la información.
-- Req. e: El usuario encargado puede crear productos, con los mismos datos que proporciona el usuario propietario.
-- Req. e: El usuario encargado puede eliminar productos.
-- Req. e: El usuario encargado puede editar los trabajadores.
-- Req. e: El usuario encargado puede eliminar trabajadores.
-- Req. x: El usuario trabajador puede modificar el stock y el precio de los productos.
-- Req. x: El usuario trabajador puede modificar sus datos de usuario.
+- Req. i: El usuario propietario puede listar los productos.
+- Req. j: El usuario propietario puede editar los productos, salvo el código de referencia.
+- Req. k: El usuario propietario puede eliminar los productos.
+- Req. l: El usuario encargado puede crear productos, con los mismos datos que proporciona el usuario propietario.
+- Req. m: El usuario encargado puede modificar productos.
+- Req. n: El usuario encargado puede eliminar productos.
+- Req. ñ: El usuario encargado puede editar sus datos como trabajador, salvo el DNI.
+- Req. o: El usuario trabajador puede listar los productos.
+- Req. p: El usuario trabajador puede modificar el stock y el precio de los productos.
+- Req. q: El usuario trabajador puede listar los empleados.
+- Req. r: El usuario trabajador puede modificar sus datos de trabajador, salvo el DNI.
+- Req. s: El usuario superUsuario puede listar todas las tiendas registradas en nuestra aplicación.
+- Req. t: El usuario superUsuario puede modificar todas las tiendas registradas en nuestra aplicación, excepto el CIF.
+- Req. u: El usuario superUsuario puede eliminar todas las tiendas registradas en nuestra aplicación, eliminando así a los trabajadores y los productos correspondientes a esa tienda.
+- Req. v: El usuario superUsuario puede listar todos los empleados registradas en nuestra aplicación.
+- Req. w: El usuario superUsuario puede modificar todos los empleados registradas en nuestra aplicación, excepto el DNI.
+- Req. x: El usuario superUsuario puede eliminar todos los empleados registradas en nuestra aplicación.
 
-TODO: Anyadir els requisits del superUsuari
 
 
 ## 4. Diseño
@@ -122,32 +123,94 @@ En este caso, la transferencia de archivos era mucho más rápida, pero a la hor
 
 ## x. Pruebas
 
-Blah blah?
-Mejor, además: plan pruebas.
+- **Prueba Req a.** Cuando el usuario no está logeado, e intentamos acceder al home o a añadir un empoleado, vemos como nos redirige al login:
 
+![ Captura ventana principal sin login ](img/reqA.png)
+
+Introducimos manualmente en la barra de direcciones del navegador, para acceder al home:
+
+![ Captura remarcando cambio en la barra de direcciones para acceder al home ](img/reqA2.png)
+
+Pulsamos enter para acceder a esta url, y nos redirige al login:
+
+![ Captura remarcando cambio en la barra de direcciones al login ](img/reqA3.png)
+
+Ahora realizamos la misma comprobación, esta vez intentando acceder a la ventana de nuevo empleado:
+
+![ Captura remarcando cambio en la barra de direcciones para acceder a la ventana de nuevo empleado ](img/reqA4.png)
+
+Comprobamos como se vuelve a redireccionar al login:
+
+![ Captura remarcando cambio en la barra de direcciones al login ](img/reqA5.png)
+
+- **Prueba Req b.** Cuando accedemos a la ventana *Registrarse*, visualizamos un formulario donde podremos crear nuestra cuenta:
+
+![ Captura registro usuario ](img/reqB.png)
+
+Comprobamos que se valida el formato del email:
+
+![ Captura comprobación formato validación email ](img/reqB2.png)
+
+Comprobamos que con el formato del email correcto, el mismo no esté registrado previamente en nuestra BD:
+
+![ Captura comprobación formato validación email ](img/reqB8.png)
+
+Comprobamos que el formato del CIF es valido:
+
+![ Captura comprobación formato validación CIF ](img/reqB3.png)
+
+Con un CIF valido, comprobamos que ese mismo CIF no exista en la BD, si es así, mostraremos un error:
+
+![ Captura comprobación CIF duplicado ](img/reqB4.png)
+
+Comprobamos que el formato del DNI es correcto:
+
+![ Captura comprobación formato DNI ](img/reqB6.png)
+
+Comprobamos que con el formato del DNI correcto, no esté duplicado en la BD:
+
+![ Captura comprobación formato DNI ](img/reqB7.png)
+
+
+Introducimos dos contraseñas distintas, y vemmos como nos sale el error de que no coinciden:
+
+![ Captura comprobación contraseñas iguales ](img/reqB5.png)
 
 ## x. Integración de los módulos del ciclo
 
 - 1º Programación
   - De lenguajes de programación, para crear la app se ha usado PHP, bajo el framework de Laravel.
+  Gracias a los conocimientos adquiridos de programación Orientada a Objetos, me ha permitido ser mas agil a la hora de adquirir los conocimientos necesarios de como realziar las clases con Laravel.
 - 1º BBDD
-  - Para almacenar la información de la aplicación, se ha utilizado la base de datos de MariaDB, en su versión 10.4.14, con el motor de vista web PHPMyAdmin.
-  - Para almacenar las imágenes, se ha utilizado la función Storage, de Google Firebase, la cual nos permite almacenar archivos en su sistemas, con los límites gratuitos que he explicado anteriormente. 
+  - Para almacenar la información de la aplicación, se ha utilizado la base de datos de MariaDB, en su versión 10.4.14, con el motor de vista web PHPMyAdmin, para la creación de las bases de datos SQL.
+  - Para almacenar las imágenes, se ha utilizado la función Storage, de Google Firebase, la cual nos permite almacenar archivos en su sistemas, con límites gratuitos. suficientes para esta aplicación.
 - 1º Entornos de desarrollo
   - De este módulo, he utilizado el desarrollo de las pruebas del software, para realizar las pruebas de mi aplicación, para ver que todo funcione correctamente.\
    En este caso, han sido pruebas de caja negra.
+  - También, gracias a los conocimientos adquiridos con los IDEs, me ha resultado sencillo adaptarme, en mi caso a VSCode, y a instalarme los plugins necesarios, los cuales me han ayudado con la agilidad de programación, como pueden ser *CSS Formater* y *Format HTML in PHP*, los cuales me han venido muy bien a la hora de formatear el código.
+  - Otra herramienta que aprendí en este módulo y me ha servido para el desarrollo de mi proyecto, ha sido GIT, en mi caso, he utilizado GitHub, para llevar un control de versiones, para poder ir atrás si así lo necesitaba.
 - 1º Lenguaje de Marcas y Sistemas de la gestión de la información
-  - En este caso, ha utilizado los conocimientos adquiridos con dicho módulo con HTML, para crear mi web.
+  - En este caso, ha utilizado los conocimientos adquiridos con dicho módulo con HTML, para crear mi front-end.
+  - También las bases con CSS, me vinieron muy bien para empezar con el diseño básico de la aplicación.
 - 1º Sistemas informáticos
-  - Para el despliegue  de la web en un servidor, he hecho uso de estos conocimientos con linux, ya que era la manera con la que he interactuado con el sistema de AWS.
+  - Para el despliegue  de la web en un servidor, he hecho uso de estos conocimientos con linux, ya que era la manera con la que he interactuado con el sistema de AWS, para instalar tanto apache, como php y Laravel.
+  - Para el desarrollo en local de mi proyecto, me sirvieron los conocimientos adquiridos de administración de equipo Windows, dado que es el SO con el que trabajo, la instalación y configuración de XAMMP, para tener un sistema de desarrollo en local de manera sencilla, y el sistema de transmisión de ficheros FTP, para subir el proyecto al servidor externo.
 - 2º Desarrollo Web en entorno cliente
-  - Para la aplicación de funcionalidad JS en este proyecto, conocimientos y recursos adquiridos en este módulo, ha servido de gran ayuda.
+  - Para la realización de la funcionalidad con JS en este proyecto, conocimientos y recursos adquiridos en este módulo, ha servido de gran ayuda.
+  - Algunos ejemplos de donde he utilizado JS, ha sido:
+     - No habilitar la posibilidad de añadir un producto hasta que este tenga un código de referéncia.
+     - Mostrar el contador de carácteres para la descripción de los productos.
+     - Mostrar resultados de la búsqueda de empleados y productos.
 - 2º Desarrollo Web en entorno servidor
-TODO
+  - De este módulo, he necesitado las aptitudes obtenidas para la comunicación entre el servidor y la BD, a la hora de almacenar, obtener y editar los datos que se introducían en la web.
+  - También me ha servido de ayuda la introducción que se nos hizo en dicho módulo con Laravel 5, ya que me proporcionó las herramientas y los conocimentos básicos para empezar con mi proyecto.
 - 2º Despliegue  de aplicaciones web
-  - En este módulo, se nos enseñó a como realizar  el despliegue de aplicaciones web, y estos conocimientos han sido de ayuda a la hora de saber como debía de instalar Laravel en mi equipo.
+  - En este módulo, se nos enseñó a como realizar  el despliegue de aplicaciones web, y estos conocimientos han sido de ayuda a la hora de saber como debía de instalar Laravel 8 en mi equipo.
+  - Asimismo, estos conocimentos me ayudarlon a la hora de instalar Laravel 8 en el servidor externo.
 - 2º Diseño de interfaces Web
-  - Me ha servido de ayuda el conocimiento adquirido en este curso para saber a como organizar la vista de los productos y de los empleados en formato Flexbox, así como la creación del CSS.
+  - Me ha servido de ayuda el conocimiento adquirido en este módulo para saber a como organizar la vista de los productos y de los empleados en formato Flexbox, así como la creación del CSS.
+  - Además de la integración de nuevas fuentes de texto bulletproof, y la creación de un diseño responsive, para adaptar la vista a todo tipo de pantallas.
+ 
 
 
 ## 7. Conclusiones
