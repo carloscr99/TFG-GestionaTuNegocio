@@ -198,10 +198,10 @@ function displayFilteredEmployers($busquedaFiltrada) {
                 <p class="card-text">${$busquedaFiltrada.rol} </p>
             </div>
             <div class="card-footer">
-            <a href="ProductEdit/${$busquedaFiltrada.reference}" class="btn btn-primary">Editar
-            producto</a>
+            <a href="EmployerEdit/${$busquedaFiltrada.dni}" class="btn btn-primary">Editar
+            empleado</a>
     </div>
-    <a onclick="deleteProduct('${$busquedaFiltrada.reference}', '{{Auth::user()->workAt}}', '{{Auth::user()->rol}}')"
+    <a onclick="deleteEmployer('${$busquedaFiltrada.dni}', '{{Auth::user()->workAt}}', '{{Auth::user()->rol}}')"
         class="btn btn-danger">Eliminar producto</a>
             </div>
             </div>

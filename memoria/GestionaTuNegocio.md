@@ -76,6 +76,8 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
   - Contraseña (Han de coincidir)
 
 - Req. d: El usuario propietario puede listar todos los trabajadores, y ver sus detalles.
+- Req. za: El usuario propietario puede buscar entre sus trabajadores por su nombre, dni, rol o email.
+- Req. zb: El usuario propietario puede ordenar la búsqueda de sus trabajadores por rol, nombre ascendente o nombre descendente.
 - Req. e: El usuario propietario puede modificar cualquier campo de un usuario, incluido él mismo salvo el campo DNI.
 - Req. f: El usuario propietario puede borrar cualquier otro usuario, excepto a si mismo.
 - Req. g: El usuario propietario puede dar de baja su cuenta junto con toda la información de su negocio (usuarios, productos y la propia tienda).
@@ -175,6 +177,71 @@ Comprobamos que con el formato del DNI correcto, no esté duplicado en la BD:
 Introducimos dos contraseñas distintas, y vemmos como nos sale el error de que no coinciden:
 
 ![ Captura comprobación contraseñas iguales ](img/reqB5.png)
+
+- **Prueba Req C**. Cuando creamos la tienda y nuestro usuario, vemos que nos redirige a una ventana donde crear trabajadores. Comprobamos que valida que el DNI no esté registrado:
+
+![ Captura comprobación DNI duplicado ](img/reqC.png)
+
+Comprobamos el formato del DNI:
+
+![ Captura comprobación DNI formato ](img/reqC2.png)
+
+
+Comrobamos el formato del IBAN:
+
+![ Captura comprobación formato IBAN ](img/reqC3.png)
+
+
+Comrpobamos que las contraseñas coincidan:
+
+![ Captura comprobación contraseñas coinciden ](img/reqC4.png)
+
+Comprobamos el formato del correo:
+
+![ Captura comprobación formato correo ](img/reqC5.png)
+
+Comprobamos que el correo no exista:
+
+![ Captura comprobación correo no duplicado ](img/reqC6.png)
+
+   - **Req d**. Accedemos a la pestaña de empleados, y vemos la lista de todos nuestros empleados:
+
+![ Listado de empleados ](img/reqD.png)
+
+  - **Req za**. Comprobamos que podemos buscar a través del nomrbe:
+
+![ Listado de empleados buscados por nombre ](img/reqZA.png)
+
+   Comprobamos que podemos buscar por el email:
+
+![ Listado de empleados buscados por email ](img/reqZA2.png)
+
+  Comprobamos que podemos buscar por el rol 
+
+![ Listado de empleados buscados por rol ](img/reqZA3.png)
+
+  Comprobamos que podemos buscar por el dni:
+
+![ Listado de empleados buscados por dni ](img/reqZA4.png)
+
+- **Req. zb**. Comprobamos que los trabajadores se ordenan por rol:
+
+![ Listado de empleados ordenado por rol ](img/reqZB.png)
+
+Comprobamos que los trabajadores se ordenan por nombre ascendente:
+
+![ Listado de empleados ordenado por nombre ascendente ](img/reqZB2.png)
+
+Comprobamos que los trabajadores se ordenan por nombre descendiente:
+
+![ Listado de empleados ordenado por nombre descendiente ](img/reqZB3.png)
+
+- **Req. e**. Pulsamos sobre el botón editar empleado, y se nos abre una ventana con todos sus datos para editar:
+
+![ Ventana edición empleado ](img/reqE.png)
+
+
+
 
 ## x. Integración de los módulos del ciclo
 
