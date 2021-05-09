@@ -236,9 +236,72 @@ Comprobamos que los trabajadores se ordenan por nombre descendiente:
 
 ![ Listado de empleados ordenado por nombre descendiente ](img/reqZB3.png)
 
-- **Req. e**. Pulsamos sobre el botón editar empleado, y se nos abre una ventana con todos sus datos para editar:
+- **Req. e**. Pulsamos sobre el botón editar empleado, y se nos abre una ventana con todos sus datos para editar, excepto el campo del DNI y el CIF empresa, los cuales están deshabilitados:
 
 ![ Ventana edición empleado ](img/reqE.png)
+
+
+Cambiamos los datos del empleado anterior:
+
+![ Ventana edición empleado con cambios ](img/reqE2.png)
+
+Le damos al botón "Guardar", y se nos redirigirá a la venetana de empleados, donde podremos ver el cambio en el nombre y su rol:
+
+![ Ventana empleados con los cambios del usuairo ](img/reqE3.png)
+
+- **Req. f**. Comprobamos que el propietario puede eliminar un empleado, para ello, pulsamos sobre el botón eliminar y nos aparecerá la siguente ventana:
+
+![ Ventana popUp eliminar empleado ](img/reqF.png)
+
+Si indicamos que si, nos elimina el usuario de la BD,y nos sale la siguietne ventana:
+
+![ Ventana popUp notificación eliminación empleado ](img/reqF2.png)
+
+Una vez hacemos click para cerrar esa ventana PopUp, comprobamos que efectivamente, se ha eliminado el empleado, haciendo uso de la barra de búsqueda, introducimos el DNI o el nombre el empleado que hemos eliminado, y vemos que ya no aparece:
+
+![ Ventana comprobar empleado eliminado ](img/reqF3.png)
+
+Comprobamos que cuando intenta elimiarse a si mismo, sale una alerta impidiendo dicha acción:
+
+![ Ventana popUp impedir eliminarse a si mismo ](img/reqF4.png)
+
+- **Req. g**. //TODO
+
+- **Req. h**. El usuario propietario crea un producto, llenando los datos necesairos:
+
+![ Ventana con los datos del producto ](img/reqH.png)
+
+Pulsamos en "Añadir producto", y se nos redirige a la ventana principal, donde podemos buscar el producto que hemos introducido:
+
+![ Ventana el producto añadido ](img/reqH2.png)
+
+- **Req. i**. Comrpobamos que puede listar todos los productos que hay en la tienda:
+
+![  Listado de productos ](img/reqH3.png)
+
+- **Req. j**. Comrobamos que puede editar todos los campos de un producto, excepto el código de referencia:
+
+![  Ventana de edición de un producto ](img/reqJ.png)
+
+Modificamos los datos que queremos cambiar:
+
+![  Ventana de edición de un producto con los cambios realziados ](img/reqJ2.png)
+
+Pulsamos sobre el botón guardar, y en el listado de productos, vemos como se han cambiado los datos:
+
+![  Listado de productos ](img/reqJ3.png)
+
+- **Req. k**. En el listado de productos, pulsamos para eliminar un producto, y nos aparecerá la siguiente ventana popUp:
+
+![  Ventana popUp aviso eliminación prodcuto ](img/reqK.png)
+
+Cuando indicamos que queremos eliminar el producto, nos aparecerá esta ventana si todo ha ido bien:
+
+![  Ventana popUp confirmación eliminación prodcuto ](img/reqK2.png)
+
+Hacemos click en "Ok", para cerrar la ventana popUp, y vemos como en el listado de productos ya no aparece:
+
+![  Listado de productos ](img/reqK3.png)
 
 
 

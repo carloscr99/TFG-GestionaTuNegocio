@@ -145,7 +145,7 @@ echo "<input id='cif' type='text' value='$cifEmpresa' hidden/>"
                 <div class="form-group row mb-4">
                     <div class="col-md-6 offset-md-4">
                         <button type="submit" id="btn-submit" class="btn btn-primary">
-                            {{ __('Editar producto') }}
+                            {{ __('Guardar') }}
                         </button>
 
                     </div>

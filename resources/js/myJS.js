@@ -202,7 +202,7 @@ function displayFilteredEmployers($busquedaFiltrada) {
             empleado</a>
     </div>
     <a onclick="deleteEmployer('${$busquedaFiltrada.dni}', '{{Auth::user()->workAt}}', '{{Auth::user()->rol}}')"
-        class="btn btn-danger">Eliminar producto</a>
+        class="btn btn-danger">Eliminar empleado</a>
             </div>
             </div>
         </div>`;
