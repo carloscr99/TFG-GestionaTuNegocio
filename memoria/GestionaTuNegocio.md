@@ -80,6 +80,7 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
 - Req. zb: El usuario propietario puede ordenar la búsqueda de sus trabajadores por rol, nombre ascendente o nombre descendente.
 - Req. e: El usuario propietario puede modificar cualquier campo de un usuario, incluido él mismo salvo el campo DNI.
 - Req. f: El usuario propietario puede borrar cualquier otro usuario, excepto a si mismo.
+- Req. zc: El usuario propietario puede ver y modificar la información de su negocio, excepto el CIF.
 - Req. g: El usuario propietario puede dar de baja su cuenta junto con toda la información de su negocio (usuarios, productos y la propia tienda).
 - Req. h: El usuario propietario  puede crear productos. Para cada uno de ellos, se incorporará la siguiente información:
     - Nombre
@@ -93,11 +94,13 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
 - Req. j: El usuario propietario puede editar los productos, salvo el código de referencia.
 - Req. k: El usuario propietario puede eliminar los productos.
 - Req. l: El usuario encargado puede crear productos, con los mismos datos que proporciona el usuario propietario.
-- Req. m: El usuario encargado puede modificar productos.
+- Req. m: El usuario encargado puede modificar productos, con las mismas condiciones que el propietario.
 - Req. n: El usuario encargado puede eliminar productos.
+- Req. ze: El usuario encargado puede listar los trabajadores.
 - Req. ñ: El usuario encargado puede editar sus datos como trabajador, salvo el DNI.
 - Req. o: El usuario trabajador puede listar los productos.
 - Req. p: El usuario trabajador puede modificar el stock y el precio de los productos.
+- Req. zd: El usuario trabajador no puede eliminar productos.
 - Req. q: El usuario trabajador puede listar los empleados.
 - Req. r: El usuario trabajador puede modificar sus datos de trabajador, salvo el DNI.
 - Req. s: El usuario superUsuario puede listar todas las tiendas registradas en nuestra aplicación.
@@ -106,6 +109,7 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
 - Req. v: El usuario superUsuario puede listar todos los empleados registradas en nuestra aplicación.
 - Req. w: El usuario superUsuario puede modificar todos los empleados registradas en nuestra aplicación, excepto el DNI.
 - Req. x: El usuario superUsuario puede eliminar todos los empleados registradas en nuestra aplicación.
+- Req. z: Todos los usarios pueden solicitar un restablecimiento de contraseña, la cual llegará a su correo.
 
 
 
@@ -204,11 +208,11 @@ Comprobamos que el correo no exista:
 
 ![ Captura comprobación correo no duplicado ](img/reqC6.png)
 
-   - **Req d**. Accedemos a la pestaña de empleados, y vemos la lista de todos nuestros empleados:
+- **Prueba Req d**. Accedemos a la pestaña de empleados, y vemos la lista de todos nuestros empleados:
 
 ![ Listado de empleados ](img/reqD.png)
 
-  - **Req za**. Comprobamos que podemos buscar a través del nomrbe:
+- **Prueba Req za**. Comprobamos que podemos buscar a través del nomrbe:
 
 ![ Listado de empleados buscados por nombre ](img/reqZA.png)
 
@@ -224,7 +228,7 @@ Comprobamos que el correo no exista:
 
 ![ Listado de empleados buscados por dni ](img/reqZA4.png)
 
-- **Req. zb**. Comprobamos que los trabajadores se ordenan por rol:
+- **Prueba Req. zb**. Comprobamos que los trabajadores se ordenan por rol:
 
 ![ Listado de empleados ordenado por rol ](img/reqZB.png)
 
@@ -236,7 +240,7 @@ Comprobamos que los trabajadores se ordenan por nombre descendiente:
 
 ![ Listado de empleados ordenado por nombre descendiente ](img/reqZB3.png)
 
-- **Req. e**. Pulsamos sobre el botón editar empleado, y se nos abre una ventana con todos sus datos para editar, excepto el campo del DNI y el CIF empresa, los cuales están deshabilitados:
+- **Prueba Req. e**. Pulsamos sobre el botón editar empleado, y se nos abre una ventana con todos sus datos para editar, excepto el campo del DNI y el CIF empresa, los cuales están deshabilitados:
 
 ![ Ventana edición empleado ](img/reqE.png)
 
@@ -249,7 +253,7 @@ Le damos al botón "Guardar", y se nos redirigirá a la venetana de empleados, d
 
 ![ Ventana empleados con los cambios del usuairo ](img/reqE3.png)
 
-- **Req. f**. Comprobamos que el propietario puede eliminar un empleado, para ello, pulsamos sobre el botón eliminar y nos aparecerá la siguente ventana:
+- **Prueba Req. f**. Comprobamos que el propietario puede eliminar un empleado, para ello, pulsamos sobre el botón eliminar y nos aparecerá la siguente ventana:
 
 ![ Ventana popUp eliminar empleado ](img/reqF.png)
 
@@ -265,9 +269,22 @@ Comprobamos que cuando intenta elimiarse a si mismo, sale una alerta impidiendo 
 
 ![ Ventana popUp impedir eliminarse a si mismo ](img/reqF4.png)
 
-- **Req. g**. //TODO
+- **Prueba Req. zc**. Accedemos al menú "Tienda", y vemos la información de nuestra tienda:
 
-- **Req. h**. El usuario propietario crea un producto, llenando los datos necesairos:
+![ Ventana con información de la tineda ](img/reqZC.png)
+
+Modificamos los datos:
+
+![ Ventana con información de la tineda ](img/reqZC2.png)
+
+Los guardamos, y vemos que se nos redirige al home. Si volvemos a aceeder, vemos como ahora aparecen los datos que hemos introducido anteriormente:
+
+![ Ventana con información de la tineda ](img/reqZC3.png)
+
+
+- **Prueba Req. g**. //TODO
+
+- **Prueba Req. h**. El usuario propietario crea un producto, llenando los datos necesairos:
 
 ![ Ventana con los datos del producto ](img/reqH.png)
 
@@ -275,11 +292,11 @@ Pulsamos en "Añadir producto", y se nos redirige a la ventana principal, donde 
 
 ![ Ventana el producto añadido ](img/reqH2.png)
 
-- **Req. i**. Comrpobamos que puede listar todos los productos que hay en la tienda:
+- **Prueba Req. i**. Comrpobamos que puede listar todos los productos que hay en la tienda:
 
 ![  Listado de productos ](img/reqH3.png)
 
-- **Req. j**. Comrobamos que puede editar todos los campos de un producto, excepto el código de referencia:
+- **Prueba Req. j**. Comrobamos que puede editar todos los campos de un producto, excepto el código de referencia:
 
 ![  Ventana de edición de un producto ](img/reqJ.png)
 
@@ -291,7 +308,7 @@ Pulsamos sobre el botón guardar, y en el listado de productos, vemos como se ha
 
 ![  Listado de productos ](img/reqJ3.png)
 
-- **Req. k**. En el listado de productos, pulsamos para eliminar un producto, y nos aparecerá la siguiente ventana popUp:
+- **Prueba Req. k**. En el listado de productos, pulsamos para eliminar un producto, y nos aparecerá la siguiente ventana popUp:
 
 ![  Ventana popUp aviso eliminación prodcuto ](img/reqK.png)
 
@@ -304,6 +321,48 @@ Hacemos click en "Ok", para cerrar la ventana popUp, y vemos como en el listado 
 ![  Listado de productos ](img/reqK3.png)
 
 
+- **Prueba Req. l**. Ahora, accedemos a la aplicación con el usuario de un encargado, y comprobamos que podemos crear productos, para ello, pulsamos sobre el botón "Añadir producto", y vemos que se nos habre la ventana como con el propietario.\
+Introducimos los datos necesairos:
+
+![  Encargado añade nuevo producto ](img/reqL.png)
+
+Pulsamos sobre el botón "Añadir producto", y en el listado de productos, podemos buscar el que acabamos de introducir:
+
+![  Listado de productos ](img/reqL2.png)
+
+- **Prueba Req. m**. En el listado de productos, pulsamos sobre uno de ellos, en el botón "Editar producto", y veremos que se nos abre la vista de edición del producto seleccionado:
+
+![  Encargado editar un producto ](img/reqM.png)
+
+Pulsamos sobre "Guardar", y en la lista de productos, podemos ver que se han guardado los cambios:
+
+![  Listado de productos ](img/reqM2.png)
+
+- **Prueba Req. n**. En el listado de productos, pulsamos sobre el botón "Eliminar producto", nos sale una ventana popUp como en el propietario, pidiendo la confirmación de la acción:
+
+![  PopUp pidiendo confirmación eliminar producto ](img/reqN.png)
+
+Aceptamos la operación, nos aparecerá una ventana popUp notificando de que la acción ha salido correctamente:
+
+
+![  PopUp informando de acción realizada ](img/reqN2.png)
+
+Y luego, cuando accedemos al listado de productos, observamos que ese ya no aparece:
+
+![  Listado de productos ](img/reqN3.png)
+
+- **Prueba Req. ze**. Accedemos a la ventana de Empleados, y vemos como aparecen todos ellos, pero solo tiene el botón de editar empleado él mismo:
+
+![  Listado de empleados ](img/reqZE.png)
+
+- **Prueba Req. ñ**. Pulsamos para editar sus datos, y nos aparece la ventana para editar todos sus datos, salvo el DNI:
+
+![  Ventana de edición del empleado  ](img/reqÑ.png)
+
+Cambiamos los datos que deseamos cambiar, en este caso he añadido el nombre del encargado, y le damos aguardar.\
+En el listado de empleados, podemos ver el cambio:
+
+![  Listado de empleados ](img/reqÑ2.png)
 
 
 ## x. Integración de los módulos del ciclo

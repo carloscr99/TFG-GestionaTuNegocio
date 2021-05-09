@@ -61,7 +61,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" id="btn-submit" class="btn btn-primary">
-                                    {{ __('Editar tienda') }}
+                                    {{ __('Guardar cambios') }}
                                 </button>
                                 <a onClick="deleteShop('{{ $shop->cif }}')" class="btn btn-danger">
                                     {{ __('Eliminar tienda') }}

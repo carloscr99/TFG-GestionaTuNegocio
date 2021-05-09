@@ -319,7 +319,7 @@ function deleteEmployer($dni, $rol, $rolLogeado,) {
                         success: function (data) {
                             Swal.fire(
                                 'Eliminado!',
-                                'Producto eliminado correctamente ',
+                                'Empleado eliminado correctamente ',
                                 'success'
                             ).then(function () {
                                 window.location = "Employers";
