@@ -97,12 +97,12 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
 - Req. m: El usuario encargado puede modificar productos, con las mismas condiciones que el propietario.
 - Req. n: El usuario encargado puede eliminar productos.
 - Req. ze: El usuario encargado puede listar los trabajadores.
-- Req. ñ: El usuario encargado puede editar sus datos como trabajador, salvo el DNI.
+- Req. ñ: El usuario encargado puede editar sus datos como trabajador, salvo el DNI y su rol.
 - Req. o: El usuario trabajador puede listar los productos.
 - Req. p: El usuario trabajador puede modificar el stock y el precio de los productos.
 - Req. zd: El usuario trabajador no puede eliminar productos.
 - Req. q: El usuario trabajador puede listar los empleados.
-- Req. r: El usuario trabajador puede modificar sus datos de trabajador, salvo el DNI.
+- Req. r: El usuario trabajador puede modificar sus datos de trabajador, salvo el DNI y su rol.
 - Req. s: El usuario superUsuario puede listar todas las tiendas registradas en nuestra aplicación.
 - Req. t: El usuario superUsuario puede modificar todas las tiendas registradas en nuestra aplicación, excepto el CIF.
 - Req. u: El usuario superUsuario puede eliminar todas las tiendas registradas en nuestra aplicación, eliminando así a los trabajadores y los productos correspondientes a esa tienda.
@@ -363,6 +363,31 @@ Cambiamos los datos que deseamos cambiar, en este caso he añadido el nombre del
 En el listado de empleados, podemos ver el cambio:
 
 ![  Listado de empleados ](img/reqÑ2.png)
+
+- **Prueba Req. o**. Accedemos a la web desde un usuario cuyo rol sea trabajador, y vemos que puede ver todos los productos que hay registrados en su tienda:
+
+![  Listado de productos ](img/reqO.png)
+
+- **Prueba Req. p**. Accedemos para editar un producto, y vemos que solo están habilitados los campos de stock y precio para ser editados:
+
+![  Edición producto por un trabajador ](img/reqP.png)
+
+Editamos los campos, guardamos, y cuando volvemos a aceder, vemos que ahora tiene el nuevo precio y el nuevo stock:
+
+![  Edición producto por un trabajador ](img/reqP2.png)
+
+- **Prueba Req. zd**. Comprobamos que no puede eliminar productos, pulsando en el botón, y observando que nos sale un mensaje de error impidiendonos la acción:
+
+![  Mensaje error impidiendo el borrado de productos por parte del trabajador ](img/reqZD.png)
+
+- **Prueba Req. q**. Accedemos a la ventana de "Empleados", y vemos como aparecen todos los empleados de la tienda donde trabaja:
+
+![  Listado de empleados ](img/reqQ.png)
+
+- **Prueba Req. r**. Como vemos en el listado anterior, solo tiene habilitado s botón de "Editar empleado", accedemos, y vemos sus datos de usuario:
+
+
+
 
 
 ## x. Integración de los módulos del ciclo

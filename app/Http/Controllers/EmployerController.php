@@ -8,10 +8,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
 
 class EmployerController extends Controller
 {
@@ -44,16 +42,15 @@ class EmployerController extends Controller
 
         $owner = Auth::user();
 
-        if($owner-> rol == 'superadmin'){
+        if ($owner->rol == 'superadmin') {
 
             $employers = DB::table('users')->get();
 
-        }else{
-            
-            $employers = DB::table('users')->where('workAt', $owner->workAt)->get();
-            
-        }
+        } else {
 
+            $employers = DB::table('users')->where('workAt', $owner->workAt)->get();
+
+        }
 
         return view('employers', ['employers' => $employers]);
 
@@ -75,7 +72,7 @@ class EmployerController extends Controller
     public function create(Request $request)
     {
         //Validamos los datos
-        $validateData =  $request->validate ([
+        $validateData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'dni' => ['required', 'string', 'max:9', 'regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i', 'unique:users'],
             'iban' => ['string', 'max:26', 'regex:/ES\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}|ES\d{22}/i'],
@@ -93,7 +90,7 @@ class EmployerController extends Controller
         $employer->email = $request->email;
         $employer->rol = $request->rol;
         $employer->password = Hash::make($request->password);
-        $employer->workAt = $owner->workAt;  //Introducimos el cif de la empresa obteniendolo del usuario loggeado
+        $employer->workAt = $owner->workAt; //Introducimos el cif de la empresa obteniendolo del usuario loggeado
 
         $employer->save();
 
@@ -104,7 +101,6 @@ class EmployerController extends Controller
     public function openEdit(Request $request, $dniEmployer)
     {
 
-
         $employer = DB::table('users')->where('dni', $dniEmployer)->first();
 
         return view('newEmployer', ['employer' => $employer]);
@@ -114,49 +110,51 @@ class EmployerController extends Controller
     public function edit(Request $request)
     {
 
-        $validateData =  $request->validate ([
+        $validateData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'iban' => ['nullable','string', 'max:26', 'regex:/ES\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}|ES\d{22}/i'],
+            'iban' => ['nullable', 'string', 'max:26', 'regex:/ES\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}|ES\d{22}/i'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'rol' => ['string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        
-        if(Auth::user()->rol == 'superadmin'){
-            
-            if($request->rol === 'Seleciona su rol'){
-                DB::update("update users set name=?, iban=?, email=?, password=?, restablished=1 where workAt=? and dni=?", 
-                [$request->name, $request->iban, $request->email, Hash::make($request->password), $request->workAt , $request->dni]);
-            }else{
-                DB::update("update users set name=?, iban=?, email=?, rol=?, password=?, restablished=1 where workAt=? and dni=?", 
-                [$request->name, $request->iban, $request->email, $request->rol, Hash::make($request->password), $request->workAt , $request->dni]);
+        if (Auth::user()->rol == 'superadmin') {
+
+            if ($request->rol === 'Seleciona su rol') {
+                DB::update("update users set name=?, iban=?, email=?, password=?, restablished=1 where workAt=? and dni=?",
+                    [$request->name, $request->iban, $request->email, Hash::make($request->password), $request->workAt, $request->dni]);
+            } else {
+                DB::update("update users set name=?, iban=?, email=?, rol=?, password=?, restablished=1 where workAt=? and dni=?",
+                    [$request->name, $request->iban, $request->email, $request->rol, Hash::make($request->password), $request->workAt, $request->dni]);
             }
 
-           
+        } elseif (Auth::user()->rol != 'propietario') {
 
-        }else{
+            DB::update("update users set name=?, iban=?, email=?, password=?, restablished=0 where workAt=? and dni=?",
+                [$request->name, $request->iban, $request->email, Hash::make($request->password), $request->workAt, $request->dni]);
 
-            if($request->rol === 'Seleciona su rol'){
+        } else {
 
-                DB::update("update users set name=?, iban=?, email=?, password=?, restablished=0 where workAt=? and dni=?", 
-                [$request->name, $request->iban, $request->email, Hash::make($request->password), $request->workAt , $request->dni]);
-    
-            } else{
+            if ($request->rol === 'Seleciona su rol') {
 
-                DB::update("update users set name=?, iban=?, email=?, rol=?, password=?, restablished=0 where workAt=? and dni=?", 
-                [$request->name, $request->iban, $request->email, $request->rol, Hash::make($request->password), $request->workAt , $request->dni]);
-    
+                DB::update("update users set name=?, iban=?, email=?, password=?, restablished=0 where workAt=? and dni=?",
+                    [$request->name, $request->iban, $request->email, Hash::make($request->password), $request->workAt, $request->dni]);
+
+            } else {
+
+                DB::update("update users set name=?, iban=?, email=?, rol=?, password=?, restablished=0 where workAt=? and dni=?",
+                    [$request->name, $request->iban, $request->email, $request->rol, Hash::make($request->password), $request->workAt, $request->dni]);
 
             }
-           
+
         }
-        
+
         return redirect('Employers');
 
     }
 
-    public function delete(Request $request, $employer){
+    public function delete(Request $request, $employer)
+    {
 
         $owner = Auth::user();
 
@@ -164,5 +162,4 @@ class EmployerController extends Controller
 
     }
 
-  
 }

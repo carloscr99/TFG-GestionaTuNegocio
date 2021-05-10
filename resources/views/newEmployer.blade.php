@@ -98,14 +98,27 @@
                         <div class="form-group row">
                             <label for="rol" class="col-md-4 col-form-label text-md-right">{{ __('Rol: ') }}</label>
                             <div class="col-md-6">
-                                <select id="rol" name="rol" class="btn btn-secondary btn-lg dropdown-toggle">
+                            @if(\Auth::user()->rol == 'trabajador')
+                                <select id="rol" name="rol" class="btn btn-secondary btn-lg dropdown-toggle" disabled>
                                     <option> Seleciona su rol</option>
                                     <option value="trabajador" {{$employer->rol == 'trabajador' ? 'selected' : ''}}>
                                         Trabajador</option>
                                     <option value="encargado" {{$employer->rol == 'encargado' ? 'selected' : ''}}>
                                         Encargado
                                     </option>
-                                </select>         
+                                </select>
+                            @else
+
+                            <select id="rol" name="rol" class="btn btn-secondary btn-lg dropdown-toggle">
+                                    <option> Seleciona su rol</option>
+                                    <option value="trabajador" {{$employer->rol == 'trabajador' ? 'selected' : ''}}>
+                                        Trabajador</option>
+                                    <option value="encargado" {{$employer->rol == 'encargado' ? 'selected' : ''}}>
+                                        Encargado
+                                    </option>
+                                </select>
+
+                            @endif      
                             </div>
                         </div>
 

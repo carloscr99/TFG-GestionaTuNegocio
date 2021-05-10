@@ -60,7 +60,7 @@
                             <p class="card-text">{{$employer->rol}}</p>
                         </div>
                         <div class="card-footer">
-                        @if((\Auth::user()->rol == 'trabajador') || Auth::user()->rol == 'encargado'  && Auth::user()->dni == $employer->dni)
+                        @if((\Auth::user()->rol == 'trabajador' || Auth::user()->rol == 'encargado')  && Auth::user()->dni == $employer->dni)
                             <a href={{ route('EmployerEdit', [$employer->dni])}} class="btn btn-primary">Editar empleado</a>
                         @elseif(\Auth::user()->rol == 'propietario')
                         <a href={{ route('EmployerEdit', [$employer->dni])}} class="btn btn-primary">Editar empleado</a>
