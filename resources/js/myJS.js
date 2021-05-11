@@ -80,6 +80,23 @@ function searchEmployers($items) {
 
 }
 
+function searchShops($items) {
+
+    const searchBar = document.getElementById('searchShop');
+    searchBar.addEventListener('keyup', (e) => {
+        const busqueda = e.target.value.toLowerCase();
+        const busquedaFiltrada = $items.filter(item => {
+            return item.nameShop.toLowerCase().includes(busqueda) || item.direction.toLowerCase().includes(busqueda) 
+            || item.city.toLowerCase().includes(busqueda) || item.country.toLowerCase().includes(busqueda) 
+            || item.cif.toLowerCase().includes(busqueda);
+        });
+        displayFilteredShops(busquedaFiltrada);
+    });
+
+
+}
+
+
 function orderProducts($items) {
 
     const orderBy = document.getElementById('orderBy');
@@ -152,6 +169,44 @@ function orderEmployers($items) {
 
 }
 
+function orderShops($items) {
+
+    const orderBy = document.getElementById('orderByShops');
+    var busquedaOrdenada = "";
+    orderBy.addEventListener('change', (e) => {
+        var option = e.target.value;
+        console.log(option);
+
+        switch (option) {
+            case 'nombreAscendente':
+
+                busquedaOrdenada = $items.sort((a,b)=>(a.nameShop > b.nameShop) ? 1 : ((b.nameShop > a.nameShop) ? -1 :0));
+
+                break;
+            case 'nombreDescendente':
+
+                busquedaOrdenada = $items.sort((a,b)=>(a.nameShop < b.nameShop) ? 1 : ((b.name < a.nameShop) ? -1 :0));
+
+                break;
+                case 'cifAscendente':
+
+                    busquedaOrdenada = $items.sort((a,b)=>(a.cif > b.cif) ? 1 : ((b.cif > a.cif) ? -1 :0));
+    
+                    break;
+                case 'cifDescendente':
+    
+                    busquedaOrdenada = $items.sort((a,b)=>(a.cif < b.cif) ? 1 : ((b.cif < a.cif) ? -1 :0));
+    
+                    break;
+
+            default:
+                break;
+        }
+        displayFilteredShops(busquedaOrdenada);
+    });
+
+}
+
 
 
 function displayFilteredProducts($busquedaFiltrada) {
@@ -203,6 +258,32 @@ function displayFilteredEmployers($busquedaFiltrada) {
     </div>
     <a onclick="deleteEmployer('${$busquedaFiltrada.dni}', '{{Auth::user()->workAt}}', '{{Auth::user()->rol}}')"
         class="btn btn-danger">Eliminar empleado</a>
+            </div>
+            </div>
+        </div>`;
+    });
+
+    list.innerHTML = htmlFiltered;
+
+}
+
+function displayFilteredShops($busquedaFiltrada) {
+
+    const list = document.getElementById("shop");
+
+    const htmlFiltered = $busquedaFiltrada.map(($busquedaFiltrada) => {
+        return `<div class="col-md-5 mb-5">
+        <div class="card h-100">
+            <img class="card-img-top" src="https://via.placeholder.com/300x200" alt="">
+            <div class="card-body">
+                <h4 class="card-title">${$busquedaFiltrada.nameShop}</h4>
+                <p class="card-text">${$busquedaFiltrada.direction}</p>
+                <p class="card-text">${$busquedaFiltrada.cif} </p>             
+            </div>
+            <div class="card-footer">
+            <a href="shop/${$busquedaFiltrada.cif}" class="btn btn-primary">Editar
+            tienda</a>
+            </div>
             </div>
             </div>
         </div>`;
@@ -381,12 +462,12 @@ function autorizadoCreateProducto($rol) {
 
 function autorizadoCreateEmployer($rol) {
 
-    if ($rol === 'trabajador' || $rol == 'encargado') {
+    if ($rol != 'propietario') {
 
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'No tienes permisos para hacer esto...',
+            text: 'No tienes permisos para hacer esto, eso es cosa del propietario',
 
         })
 
