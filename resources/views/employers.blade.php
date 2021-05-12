@@ -58,6 +58,7 @@
                             <p class="card-text">{{$employer->dni}}</p>
                             <p class="card-text">{{$employer->email}}</p>
                             <p class="card-text">{{$employer->rol}}</p>
+                            <p class="card-text">{{$employer->workAt}}</p>
                         </div>
                         <div class="card-footer">
                         @if((\Auth::user()->rol == 'trabajador' || Auth::user()->rol == 'encargado')  && Auth::user()->dni == $employer->dni)

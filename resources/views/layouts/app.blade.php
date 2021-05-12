@@ -64,9 +64,20 @@
             <div class="container">
 
                 @auth
+                @if(\Auth::user()->rol == 'superadmin')
+
+                <a class="navbar-brand" href="{{ url('/shops') }}">
+                    {{ config('Gestiona tu negocio', 'Gestiona tu negocio') }}
+                </a>
+
+                @else
+
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('Gestiona tu negocio', 'Gestiona tu negocio') }}
                 </a>
+
+                @endif
+
                 @endauth
                 @guest
                 <a class="navbar-brand" href="{{ url('/') }}">

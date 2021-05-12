@@ -72,7 +72,8 @@ function searchEmployers($items) {
         const busqueda = e.target.value.toLowerCase();
         const busquedaFiltrada = $items.filter(item => {
             return item.name.toLowerCase().includes(busqueda) || item.dni.toLowerCase().includes(busqueda) 
-            || item.rol.toLowerCase().includes(busqueda) || item.email.toLowerCase().includes(busqueda);
+            || item.rol.toLowerCase().includes(busqueda) || item.email.toLowerCase().includes(busqueda)
+            || item.workAt.toLowerCase().includes(busqueda);
         });
         displayFilteredEmployers(busquedaFiltrada);
     });
@@ -251,6 +252,7 @@ function displayFilteredEmployers($busquedaFiltrada) {
                 <p class="card-text">${$busquedaFiltrada.dni}</p>
                 <p class="card-text">${$busquedaFiltrada.email} </p>
                 <p class="card-text">${$busquedaFiltrada.rol} </p>
+                <p class="card-text">${$busquedaFiltrada.workAt} </p>
             </div>
             <div class="card-footer">
             <a href="EmployerEdit/${$busquedaFiltrada.dni}" class="btn btn-primary">Editar

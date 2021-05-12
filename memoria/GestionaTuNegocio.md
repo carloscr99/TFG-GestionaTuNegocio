@@ -386,7 +386,26 @@ Editamos los campos, guardamos, y cuando volvemos a aceder, vemos que ahora tien
 
 - **Prueba Req. r**. Como vemos en el listado anterior, solo tiene habilitado s botón de "Editar empleado", accedemos, y vemos sus datos de usuario:
 
+![ Datos del empleado trabajador ](img/reqR.png)
 
+Modificamos sus datos, completando su apellido, y guardando los datos, en el listado de trabajadores, podremos observar ya su cambio:
+
+![ Observamos los cambios guardados ](img/reqR2.png)
+
+- **Prueba Req. s**. Accedemos con el usuario superAdministrador, y vemos que se nos listan todas las tiendas que hay registradas en nuestra aplicación:
+
+![ Listado de tiendas ](img/reqS.png)
+
+- **Prueba Req. t**. Accedemos a una tienda, y vemos sus datos:
+
+![ Edición de tiendas superAdmin ](img/reqT.png)
+
+Modificamos sus datos, pulsamos en "Guardar cambios", y en el listado de tiendas, ya podemos observar el cambio realizado (dirección):
+![ Visualización de la edición de tienda superAdmin ](img/reqT2.png)
+
+- **Prueba Req. u**. //TODO
+
+- **Prueba Req. v**. Accedemos a la venana de "Empleados", y vemos como se nos listan todos los empleados que hay registrados en nuestra plataforma:
 
 
 
