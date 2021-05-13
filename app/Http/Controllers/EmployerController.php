@@ -158,7 +158,7 @@ class EmployerController extends Controller
 
         $owner = Auth::user();
 
-        $product = DB::table('users')->where('dni', $employer)->where('workAt', $owner->workAt)->delete();
+        $product = DB::table('users')->where('dni', $employer)->delete();
 
     }
 

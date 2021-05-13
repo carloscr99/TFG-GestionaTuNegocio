@@ -97,19 +97,19 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
 - Req. m: El usuario encargado puede modificar productos, con las mismas condiciones que el propietario.
 - Req. n: El usuario encargado puede eliminar productos.
 - Req. ze: El usuario encargado puede listar los trabajadores.
-- Req. ñ: El usuario encargado puede editar sus datos como trabajador, salvo el DNI y su rol.
+- Req. ñ: El usuario encargado puede editar sus datos como trabajador, salvo el DNI, su rol y el CIF de la empresa donde trabaja.
 - Req. o: El usuario trabajador puede listar los productos.
 - Req. p: El usuario trabajador puede modificar el stock y el precio de los productos.
 - Req. zd: El usuario trabajador no puede eliminar productos.
 - Req. q: El usuario trabajador puede listar los empleados.
-- Req. r: El usuario trabajador puede modificar sus datos de trabajador, salvo el DNI y su rol.
+- Req. r: El usuario trabajador puede modificar sus datos de trabajador, salvo el DNI, su rol y el CIF de la empresa donde trabaja.
 - Req. s: El usuario superUsuario puede listar todas las tiendas registradas en nuestra aplicación.
 - Req. t: El usuario superUsuario puede modificar todas las tiendas registradas en nuestra aplicación, excepto el CIF.
 - Req. u: El usuario superUsuario puede eliminar todas las tiendas registradas en nuestra aplicación, eliminando así a los trabajadores y los productos correspondientes a esa tienda.
 - Req. v: El usuario superUsuario puede listar todos los empleados registradas en nuestra aplicación.
-- Req. w: El usuario superUsuario puede modificar todos los empleados registradas en nuestra aplicación, excepto el DNI.
+- Req. w: El usuario superUsuario puede modificar todos los empleados registradas en nuestra aplicación, excepto el DNI y el CIF de la empresa donde trabaja.
 - Req. x: El usuario superUsuario puede eliminar todos los empleados registradas en nuestra aplicación.
-- Req. z: Todos los usarios pueden solicitar un restablecimiento de contraseña, la cual llegará a su correo.
+- Req. y: Todos los usarios pueden solicitar un restablecimiento de contraseña, la cual llegará a su correo.
 
 
 
@@ -355,7 +355,7 @@ Y luego, cuando accedemos al listado de productos, observamos que ese ya no apar
 
 ![  Listado de empleados ](img/reqZE.png)
 
-- **Prueba Req. ñ**. Pulsamos para editar sus datos, y nos aparece la ventana para editar todos sus datos, salvo el DNI:
+- **Prueba Req. ñ**. Pulsamos para editar sus datos, y nos aparece la ventana para editar todos sus datos, salvo el DNI, el rol y el CIF:
 
 ![  Ventana de edición del empleado  ](img/reqÑ.png)
 
@@ -401,11 +401,53 @@ Modificamos sus datos, completando su apellido, y guardando los datos, en el lis
 ![ Edición de tiendas superAdmin ](img/reqT.png)
 
 Modificamos sus datos, pulsamos en "Guardar cambios", y en el listado de tiendas, ya podemos observar el cambio realizado (dirección):
+
 ![ Visualización de la edición de tienda superAdmin ](img/reqT2.png)
 
 - **Prueba Req. u**. //TODO
 
 - **Prueba Req. v**. Accedemos a la venana de "Empleados", y vemos como se nos listan todos los empleados que hay registrados en nuestra plataforma:
+
+![ Listado de trabajadores en el superAdmin ](img/reqV.png)
+
+- **Prueba Req. w**. Accedemos a ver la información de un empleado, y vemos como tenemos habilitados todos los campos para la edición, excepto su DNI y el CIF de la empresa donde trabaja:
+
+![ Edición de un trabajador del superAdmin ](img/reqW.png)
+
+Guardamos los cambios realizados, y en el listado de trabajadores, podemos observar como se han aplicado los cambios del nombre y del rol:
+
+![ Edición de un trabajador del superAdmin ](img/reqW2.png)
+
+- **Prueba Req. x**. En el listado de trabajadores, buscamos uno que quereamos eliminar, simepre y cuando no sea ni él mismo, ni un propietario, y nos saldrá la siguiente ventana:
+
+![ Borrado de un trabajador superAdmin ](img/reqX.png)
+
+Y si indicamos que si, nos saldrá una ventana confirmado que la acción se ha llevado a cabo. Cuando cerramos la misma, podremos comprobar en el listado de trabajadores, búscando su DNI, vemos que ya no aparece:
+
+![ Listado trabajadores buscar eliminado ](img/reqX2.png)
+
+- **Prueba Req. z**. Comprobamos el restablecimiento de la contraseña, accediendo a "Login", y pulsando en "He olvidado mi contraseña!", donde nos aparecerá la siguiente ventana:
+
+![ Ventana restablecer contraseña ](img/reqZ.png)
+
+Introducimos nuestro DNI, y veremos que se nos redirige al home, ahora, accedemmos a nuestro correo electrónico, y veremos como hemos recibido un correo como el siguiete, con la nueva contraseña:
+
+![ Ventana email recibido con la nueva contraseña ](img/reqZ2.png)
+
+Ahora, nos dirigimos a hacer login con nuestra cuenta, y si probamos nuestra anterior contraseña, veremos como nos dice que las credenciales son erroneas:
+
+![ Intento de acceso con la vieja contraseña ](img/reqZ3.png)
+
+Ahora, ponemos la nueva contraseña, y vemos que nos deja acceder, pero que nos redirige a esta otra ventana:
+
+![ Solicitud nueva contraseña ](img/reqZ4.png)
+
+Solo se nos permite cambiar la contraseña para mayor seguridad, una vez la cambiemos, se nos redirige al home:
+
+![ Vista home ](img/reqZ5.png)
+
+Ahora, podemos volver a acceder a la aplicación con la nueva contraseña.
+
 
 
 
