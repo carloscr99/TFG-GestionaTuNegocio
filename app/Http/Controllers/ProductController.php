@@ -47,22 +47,35 @@ class ProductController extends Controller
 
         $validateData =  $request->validate ([
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:300'],
+            'description' => ['nullable','string', 'max:300'],
             'reference' => ['required', 'string', 'max:30', Rule::unique('products')->where('storedAt', $owner->workAt)],
             'price' => ['required','regex:/^\d*(\.\d{2})?$/'],
             'stock' => ['required', 'int'],
         ]);
 
-        
+        if(empty($request->description)){
 
         $product->name = $request->name;
-        $product->description = $request->description;
         $product->price = $request->price;
         $product->stock = $request->stock;
         $product->reference = $request->reference;
         $product->urlImagen = $request->urlProducto;
         $product->storedAt = $owner->workAt; //Introducimos el cif de la empresa obteniendolo del usuario loggeado
 
+
+        }else{
+
+            $product->name = $request->name;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->stock = $request->stock;
+            $product->reference = $request->reference;
+            $product->urlImagen = $request->urlProducto;
+            $product->storedAt = $owner->workAt; //Introducimos el cif de la empresa obteniendolo del usuario loggeado
+    
+        }
+
+        
         $product->save();
         return redirect('home');
 
@@ -72,6 +85,14 @@ class ProductController extends Controller
     {
 
         $owner = Auth::user();
+
+        $validateData =  $request->validate ([
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['nullable','string', 'max:300'],
+            'reference' => ['required', 'string', 'max:30', Rule::unique('products')->where('storedAt', $owner->workAt)],
+            'price' => ['required','regex:/^\d*(\.\d{2})?$/'],
+            'stock' => ['required', 'int'],
+        ]);
 
         if($request->urlProducto){
             DB::update("update products set name=?, description=?, price=?, stock=?, urlImagen=? where storedAt=? and reference=?", 

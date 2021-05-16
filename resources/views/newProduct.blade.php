@@ -43,12 +43,12 @@
                             @if(\Auth::user()->rol == 'trabajador')
                                 <textarea id="description" type="description" maxlength = "300"
                                     class="form-control @error('description') is-invalid @enderror" name="description"
-                                    required autocomplete="description" readonly>{{ $product->description }}</textarea>
+                                    autocomplete="description" readonly>{{ $product->description }}</textarea>
                             @else
 
                             <textarea id="description" type="description" maxlength = "300"
                                     class="form-control @error('description') is-invalid @enderror" name="description"
-                                    required autocomplete="description">{{ $product->description }}</textarea>
+                                    autocomplete="description">{{ $product->description }}</textarea>
                                     <p id="numberCharacters" class="numberCharacters">0/300</p>
 
                             @endif
@@ -186,7 +186,7 @@ echo "<input id='cif' type='text' value='$cifEmpresa' hidden/>"
                             <div class="col-md-6">
                                 <textarea id="description" type="description" maxlength = "300"
                                     class="form-control @error('description') is-invalid @enderror" name="description"
-                                    required autocomplete="description">{{ old('description') }}</textarea>
+                                    autocomplete="description">{{ old('description') }}</textarea>
                                     <p id="numberCharacters" class="numberCharacters">0/300</p>
 
                                 @error('description')
@@ -294,6 +294,9 @@ var cif = document.getElementById("cif").value;
 console.log(cif);
 
 if (imagenASubir) {
+    //asigamos esta url por si el usuario no quiere añadir una imagen
+    document.getElementById("urlProducto").value = "https://via.placeholder.com/300x200";
+    //Subimos la imagen del usario a Google Firebase
     imagenASubir.addEventListener('change', function(e) {
         //Obtenemos la referencia del producto indicada por el usuario
         var referencia = document.getElementById("reference").value;
@@ -327,6 +330,7 @@ if (imagenASubir) {
             // For instance, get the download URL: https://firebasestorage.googleapis.com/...
             uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
                 console.log('File available at', downloadURL);
+                //Asignamos la nueva url
                 document.getElementById("urlProducto").value = downloadURL;
 
             });

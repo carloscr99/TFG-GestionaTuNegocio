@@ -25,9 +25,16 @@ En esta aplicación web, nos encontramos con una jerarquía de usuarios dentro d
     Dicho usuario tendrá todo el control sobre la aplicación, pudiendo hacer realizar la creación, lectura, actualización y borrado de usuarios, los cuales serán de rol encargado o trabajador, así como de los productos disponibles en su tienda.
     Así mismo, podrá eliminar la tienda de nuestra aplicación, cuya acción eliminará todos los datos de nuestra BD, dicha acción será irreversible, previa notificación.
   - **encargado**:\
-  Este usuario será creado previamente por el propietario, y tendrá permisos para realizar la creación, lectura, modificación y borrado de los productos de la tienda.
+  Este usuario será creado previamente por el propietario, y tendrá permisos para realizar la creación, lectura, modificación y borrado de los productos de la tienda, así de como modificar sus propios datos como usuario, excepto el DNI, el CIF de la empresa y su rol como empleado.
   - **trabajador**:\
-  Este encargado también será creado por el usuario propietario, y dentrá la posibilidad de modificar el stock de los productos de la tienda y del precio, pero no tendrá la posibilidad de crear nuevos, ni de eliminar los existentes.
+  Este encargado también será creado por el usuario propietario, y dentrá la posibilidad de modificar el stock de los productos de la tienda y del precio, pero no tendrá la posibilidad de crear nuevos, ni de eliminar los existentes, así de como modificar sus propios datos como usuario, excepto el DNI, el CIF de la empresa y su rol como empleado.
+
+- Productos:
+
+  Estos podrán ser creados tanto por los propietarios como por los encargados.
+  Dichos productos, tendrán una serie de campos, los cuales serán obligatorios, como puden ser el nombre, código de referencia, precio, stock...
+
+Tanto los trabajadores de la tienda como los productos, podrán ser buscados mediante la barra de búsqueda y ordenados por una serie de opciones, como pueden ser el precio, ascendente o descendente, en el caso de los productos, por orden alfabético en ambos casos, o por rol en el caso de los trabajadores.
 
 //TODO: mover esto al apartado del diseño
 Todos ellos, se almacenarán en una tabla donde se encontrarán los datos necesarios para la empresa para tener los datos centralizados para ellos, como el nombre, IBAN, email, DNI... Este último será el que se usará como identificador para poder editar y eliminar los usuarios, por lo que tras la inserción, este dato no podrá ser modificado.
@@ -45,9 +52,27 @@ De este modo, la carga se realiza más rápida dado que no dependemos del ancho 
 
 La ejecución del proyecto se ha desarrollado durante los meses de Marzo, Abril y Mayo.
 
-Aquí podemos ver un diagrama Gantt con el tiempo que se le ha dedicado a cada parte.
+Para la realización del diagrama de Gantt, he usado un programa de código abierto, llamado OpenProj.
+Este es un software de administración de proyectos, en el cual podremos realizar tanto Diagramas de Gantt, como tablas, como diagramas entidad-relación.
 
-TODO: INSERTAR IMAGEN AQUÍ
+Aquí podemos ver un diagrama Gantt con el tiempo aproximado que se le ha dedicado a cada parte.
+
+![ Diagrama de Gantt ](img/DiagramaDeGantt.png)
+
+### 2.1 Descripción de las tareas
+
+**Análisis de requisitos:** Esta es la primera etapa de cualquier proyecto, donde se definen que características y requisitos va a tener nuestro proyecto.
+
+**Diseño:** Es la fase donde vamos diseñando como queremos que sea nuestro proyecto, en mi caso, lo que hice fue escojer una plantilla de internet de libre uso, con Licencia MIT.
+Una vez tenemos esto claro, se realizan los cambios que se creen oportunos, para adaptar el diseño a nuestro gusto y a los requisitos definidos.
+
+**Implementación:** En esta parte del proyecto, es donde vamos creando las funcionalidades que tendrá nuestro proyecto, los cuales han de adaptarse a los requisitos que se han definido para dicho proyecto.
+
+**Plan de pruebas:** Esta es una parte muy importante del desarrollo de cualquier proyecto, donde se ha de probar la funcionalidad del mismo, con la finalidad de detectar todos los errores de implementación que puedan haber, poniendo datos extremos para buscar y detectar los errores.
+
+**Solución de errores:** Durante este tiempo, he ido corrigiendo los errores que he detectado como fallos durante el Plan de pruebas, tanto de implementación como de funcionalidad.
+
+**Memoria del proyecto:** Es el tiempo que se ha invertido para la realización de la memoria del proyecto, la cual sirve para tener documentado el desarrollo del proyecto.
 
 ## 3. Análisis de requisitos
 
@@ -84,11 +109,11 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
 - Req. g: El usuario propietario puede dar de baja su cuenta junto con toda la información de su negocio (usuarios, productos y la propia tienda).
 - Req. h: El usuario propietario  puede crear productos. Para cada uno de ellos, se incorporará la siguiente información:
     - Nombre
-    - Descripción
+    - Descripción (no obiligatorio)
     - Precio
     - Stock disponible
     - Código de referencia (No modificable a posteriori).
-    - Imagen del producto
+    - Imagen del producto (no obiligatorio)
 
 - Req. i: El usuario propietario puede listar los productos.
 - Req. j: El usuario propietario puede editar los productos, salvo el código de referencia.
@@ -97,11 +122,13 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
 - Req. m: El usuario encargado puede modificar productos, con las mismas condiciones que el propietario.
 - Req. n: El usuario encargado puede eliminar productos.
 - Req. ze: El usuario encargado puede listar los trabajadores.
+- Req. zf: El usuario encargado no puede añadir trabajadores.
 - Req. ñ: El usuario encargado puede editar sus datos como trabajador, salvo el DNI, su rol y el CIF de la empresa donde trabaja.
 - Req. o: El usuario trabajador puede listar los productos.
 - Req. p: El usuario trabajador puede modificar el stock y el precio de los productos.
 - Req. zd: El usuario trabajador no puede eliminar productos.
 - Req. q: El usuario trabajador puede listar los empleados.
+- Req. zg: El usuario trabajador no puede añadir trabajadores.
 - Req. r: El usuario trabajador puede modificar sus datos de trabajador, salvo el DNI, su rol y el CIF de la empresa donde trabaja.
 - Req. s: El usuario superUsuario puede listar todas las tiendas registradas en nuestra aplicación.
 - Req. t: El usuario superUsuario puede modificar todas las tiendas registradas en nuestra aplicación, excepto el CIF.
@@ -114,6 +141,12 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
 
 
 ## 4. Diseño
+
+Una de las primeras cosas que realizé antes de empezar con el diseño, fue pensar como quería que estuviera estructurada mi aplicación, para ello, usé una aplicación gratuita, vista previamente en clase, llamada yEd live, donde realizé un UML con la estructura:
+
+![ Diagrama de la aplicación ](img/DiagramaGestionaTuNegocio.png)
+
+Una vez tenía la estructura de la aplicación en mente, lo que hice fue pensar en la estructura que tendría mi BD, para ello, utilizé la misma aplicación.
 
 ## 5. Implementación
 
@@ -284,7 +317,7 @@ Los guardamos, y vemos que se nos redirige al home. Si volvemos a aceeder, vemos
 
 - **Prueba Req. g**. //TODO
 
-- **Prueba Req. h**. El usuario propietario crea un producto, llenando los datos necesairos:
+- **Prueba Req. h**. El usuario propietario crea un producto, llenando los datos:
 
 ![ Ventana con los datos del producto ](img/reqH.png)
 
@@ -292,9 +325,17 @@ Pulsamos en "Añadir producto", y se nos redirige a la ventana principal, donde 
 
 ![ Ventana el producto añadido ](img/reqH2.png)
 
+Ahora, vamos a realizar la misma prueba, pero solo añadiendo los campos necesarios:
+
+![ Ventana el producto añadido ](img/reqH3.png)
+
+Nuevamente, pulsamos en "Añadir producto", y vemos que se ha añadido correctamente el nuevo producto:
+
+![ Ventana el producto añadido ](img/reqH4.png)
+
 - **Prueba Req. i**. Comrpobamos que puede listar todos los productos que hay en la tienda:
 
-![  Listado de productos ](img/reqH3.png)
+![  Listado de productos ](img/reqI.png)
 
 - **Prueba Req. j**. Comrobamos que puede editar todos los campos de un producto, excepto el código de referencia:
 
@@ -355,6 +396,11 @@ Y luego, cuando accedemos al listado de productos, observamos que ese ya no apar
 
 ![  Listado de empleados ](img/reqZE.png)
 
+- **Prueba Req. zf**. Si pulsamos sobre el botón para añadir un nuevo trabajador, nos sale una alerta informámndonos de que no tenemos permisos para realizar esta acción:
+
+![  Alert indicando la no autorización de la acción solicitada ](img/reqZF.png)
+
+
 - **Prueba Req. ñ**. Pulsamos para editar sus datos, y nos aparece la ventana para editar todos sus datos, salvo el DNI, el rol y el CIF:
 
 ![  Ventana de edición del empleado  ](img/reqÑ.png)
@@ -384,7 +430,12 @@ Editamos los campos, guardamos, y cuando volvemos a aceder, vemos que ahora tien
 
 ![  Listado de empleados ](img/reqQ.png)
 
-- **Prueba Req. r**. Como vemos en el listado anterior, solo tiene habilitado s botón de "Editar empleado", accedemos, y vemos sus datos de usuario:
+- **Prueba Req. zg**. Si pulsamos sobre el botón para añadir un nuevo trabajador, nos sale una alerta informámndonos de que no tenemos permisos para realizar esta acción:
+
+![  Alert indicando la no autorización de la acción solicitada ](img/reqZG.png)
+
+
+- **Prueba Req. r**. Como vemos en el listado anterior, solo tiene habilitado el botón de "Editar empleado", accedemos, y vemos sus datos de usuario:
 
 ![ Datos del empleado trabajador ](img/reqR.png)
 

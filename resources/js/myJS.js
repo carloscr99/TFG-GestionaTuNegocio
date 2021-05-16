@@ -10,27 +10,16 @@ function habilitarBotonNewProduct() {
         if (referencia.value === '') {
 
             imgButton.disabled = true;
+            btnSubmit.disabled = true;
 
         } else {
 
             imgButton.disabled = false;
+            btnSubmit.disabled = false;
         }
 
     });
 
-    if (imgButton) {
-        imgButton.addEventListener('input', function (event) {
-
-            if (imgButton.disabled === false || imgButton.value === "") {
-                btnSubmit.disabled = false;
-
-            } else {
-                btnSubmit.disabled = true;
-            }
-
-        });
-
-    }
 
 }
 
