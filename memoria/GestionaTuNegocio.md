@@ -36,18 +36,6 @@ En esta aplicación web, nos encontramos con una jerarquía de usuarios dentro d
 
 Tanto los trabajadores de la tienda como los productos, podrán ser buscados mediante la barra de búsqueda y ordenados por una serie de opciones, como pueden ser el precio, ascendente o descendente, en el caso de los productos, por orden alfabético en ambos casos, o por rol en el caso de los trabajadores.
 
-//TODO: mover esto al apartado del diseño
-Todos ellos, se almacenarán en una tabla donde se encontrarán los datos necesarios para la empresa para tener los datos centralizados para ellos, como el nombre, IBAN, email, DNI... Este último será el que se usará como identificador para poder editar y eliminar los usuarios, por lo que tras la inserción, este dato no podrá ser modificado.
-
-Respecto a los productos, estos serán almacenados en una tabla donde los datos que se recogen, serán el nombre, descripción, stock, código de referencia... entre otros. El código de referencia, está indicado en la vista de creación que no se podrá modificar una vez añadido el producto, ya que se usa como identificador a la hora de editar y eliminar los productos.
-
-A parte de la tabla con la información de los usuarios y de los productos, también dispondremos de una tabla donde se almacenan todas las tiendas registradas en nuestra aplicación.\
-En esta, tendremos almacenados los datos como el nombre, ubicación, CIF... entre otros campos, de este modo, tanto los productos como los empleados, tendrán una clave ajena, indicando a que tienda pertenecen.
-
-En mi aplicación he usado **Google Firebase** para almacenar las imágenes de los productos de las tiendas, para así no sobrecargar la carga de la web, dado que las imágenes las obtiene de un servidor externo.\
-De este modo, la carga se realiza más rápida dado que no dependemos del ancho de banda de nuestro proveedor del host.
-
-
 ## 2. Planificación
 
 La ejecución del proyecto se ha desarrollado durante los meses de Marzo, Abril y Mayo.
@@ -57,7 +45,7 @@ Este es un software de administración de proyectos, en el cual podremos realiza
 
 Aquí podemos ver un diagrama Gantt con el tiempo aproximado que se le ha dedicado a cada parte.
 
-![ Diagrama de Gantt ](img/DiagramaDeGantt.png)
+![ Diagrama de Gantt ](img/diagramaDeGantt.png)
 
 ### 2.1 Descripción de las tareas
 
@@ -142,13 +130,88 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
 
 ## 4. Diseño
 
+### 4.1 Bases de datos
+
 Una de las primeras cosas que realizé antes de empezar con el diseño, fue pensar como quería que estuviera estructurada mi aplicación, para ello, usé una aplicación gratuita, vista previamente en clase, llamada yEd live, donde realizé un UML con la estructura:
 
 ![ Diagrama de la aplicación ](img/DiagramaGestionaTuNegocio.png)
 
 Una vez tenía la estructura de la aplicación en mente, lo que hice fue pensar en la estructura que tendría mi BD, para ello, utilizé la misma aplicación.
 
+Para almacenar los datos de mi aplicación, utilizé una base de datos MariaDB para almacenar tanto los datos de los productos, las tiendas y los trabajadores.
+
+Respecto los trabajadores, se almacenarán en una tabla donde se encontrarán los datos necesarios para la empresa para tener los datos centralizados, como el nombre, IBAN, email, DNI... Este último será el que se usará como identificador para poder editar y eliminar los usuarios, por lo que tras la inserción, este dato no podrá ser modificado.
+
+Respecto a los productos, estos serán almacenados en una tabla donde los datos que se recogen, serán el nombre, descripción, stock, código de referencia... entre otros. El código de referencia, está indicado en la vista de creación que no se podrá modificar una vez añadido el producto, ya que se usa como identificador a la hora de editar y eliminar los productos.
+
+A parte de la tabla con la información de los usuarios y de los productos, también dispondremos de una tabla donde se almacenan todas las tiendas registradas en nuestra aplicación.\
+En esta, tendremos almacenados los datos como el nombre, ubicación, CIF... entre otros campos, de este modo, tanto los productos como los empleados, tendrán una clave ajena, indicando a que tienda pertenecen.
+
+![ Diagrama entidad relación ](img/diagramaEntidadRelacion.png)
+
+En mi aplicación he usado **Google Firebase** para almacenar las imágenes de los productos de las tiendas, para así no sobrecargar la carga de la web, dado que las imágenes las obtiene de un servidor externo.\
+De este modo, la carga se realiza más rápida dado que no dependemos del ancho de banda de nuestro proveedor del host.
+Para visualizar las imágenes almacenadas en Google Firebase, obtengo el enlace de la foto, una vez subida a la plataforma, y lo almaceno en el registro del producto, en el campo llamado "urlImagen"
+
+### 4.2 Interfaz web
+
+Para la realización de la interfaz web, opté por la opción de buscar una plantilla, cuyo uso fuera libre, por lo que termié obtando por una plantilla que se adaptaba a lo que estaba buscando, y tiene una **Licencia MIT**, por lo que, después de leerme la licencia, soy consciente de que puedo usar esta plantilla sin ningún tipo de limitación.
+
+## X. Lenguajes de programación utilizados
+
+### x.x. Front-end
+
+- HTML: Es un lenguaje de marcas de hipertexto, el cual define la estructura del contenido de la web.\
+Hay muchas marcas para etiquetar el contenido y posicionarlo en la web, y actualmente estamos en la versión 5 de este lenguaje.\
+Una estructura básica para empezar a posicionar contenido en la web, es:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  Cuerpo de la página.
+</body>
+</html>
+
+```
+
+- CSS: Es un lenguaje de estilos, el cual se utiliza para describir la presentación de documentos HTML. Este describe como ha de ser renderizado el elemento en la pantalla.\
+Actualmente la última versión es la CSS3, la cual nació en 2011, y sigue siendo la última actualmente. Esta contiene especificaciones más completas y amplias que versiones anteriores.\
+He utilziado el CSS en mi proyecto para darle color y forma, así como para adaptar el contenido al tamaño de la pantalla, para cambiar el tipo de fuente de la letra... Entre otras cosas.
+
+- JavaScript: Es un lenguaje de programación ligero, interpetado en tiempo real. Este está basado en prototipos de un solo hilo, con soporte para programación orientada a objetos.\
+En mi proyecto, he utilizado este lenguaje de programación para mostrar una alerta, cuando un usuario no tiene premisos para realziar dicha acción, así como para pedir la confirmación de acciones en procesos críticos, como eliminar productos, empleados, o incluso la propia tienda.\
+También, he utilziado JS para subir las imágenes de los productos a Google Firebase, así como para modificarlas en caso de edición de la imagen de un producto, así como para mostrar los carácteres restantes para la descripción del producto, la búsqueda y disposición por orden concreto de los empleados o los productos, entre otras cosas.
+
+
+### x.x Back-end
+
+- Framework Laravel:
+
 ## 5. Implementación
+
+### 5.1 XAMPP
+
+Para el desarrollo del proyecto en mi maquina en local, he utilizado el servidor web XAMPP, ya que este nos facilita la instalación de muchos otros servicios, como pueden ser Apache, MySQL, FileZilla... entre otros.
+
+### 5.2 MariaDB
+
+En cuanto para la base de datos utilizé la herramienta que viene integrada en la aplicación XAMPP, la cual es MariaDB, y PhpMyAdmin para su gestión.
+
+### 5.3 Google Firebase
+
+Como he comentado en punto *4.1 Bases de datos*, he utilizado **Google Firebase** para el almacenamiento de las imágenes para optimizar recursos, y ayudar a que la web se carge más rápidamente, dado que las imágenes provienen de otro servidor web, como es este caso, propiedad de Google, el cual están muy optimizados para ese uso, y no como puede ser mi host contratado, que es genérico.
+Pero, porqué he utilizado Google Firebase, y no otras opciones?
+   - Por la facilidad de adaptación, y la gran información disponible en internet.
+   - Conocimiento previo de la plartaforma.
+   - Capacidad de almacenamiento y transferencia de datos más que suficiente en el modo gratuito para la realización de este proyecto, ya que ofrece de modo gratuito:
+      - 5GB de almacenamiento
+      - 1GB/dia de descargas
+      - 20.000/dia operaciones de carga
+      - 50.000/dia operaciones de descarga
+  - Posibilidad de incluir la autenticación en nuestra aplicación mediante la cuenta de Google, Facebook, Twitter... Entre otras opciones.
 
 ## x. Despliegue
 
