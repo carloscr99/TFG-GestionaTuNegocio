@@ -84,8 +84,7 @@ class ShopController extends Controller
     public function sendEmail($cif){
 
         Mail::to('gestionatunegocioccr@gmail.com')->queue(new SendEmailDeleteShop($cif));
-
-        Auth::logout();
+       
 
     }
 

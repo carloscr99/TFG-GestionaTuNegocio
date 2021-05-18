@@ -404,13 +404,13 @@ function deleteEmployer($dni, $rol, $rolLogeado,) {
     }
 }
 
-function deleteShop($cif) {
+function deleteShop($cif, $rol) {
 
     var route = "../shopDelete/";
 
     Swal.fire({
         title: '¿Estás seguro?',
-        text: "Esta opción no tiene vuelta atrás!\nEstás apunto de eliminar tu tienda con cif: " + $cif,
+        text: "Esta opción no tiene vuelta atrás!\nEstás  apunto de eliminar tu tienda con cif: " + $cif,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -418,16 +418,22 @@ function deleteShop($cif) {
         confirmButtonText: 'Si, estoy seguro!',
         cancelButtonText: 'No estoy seguro!'
     }).then((result) => {
-        $.ajax({
-            type: 'DELETE',
-            url: route + $cif,
-            data: { "_token": $("meta[name='csrf-token']").attr("content") },
-            success: function (data) {
+        if(result.isConfirmed){
+            $.ajax({
+                type: 'DELETE',
+                url: route + $cif,
+                data: { "_token": $("meta[name='csrf-token']").attr("content") },
+                success: function (data) {
 
-                window.location = 'welcome';
-
-            }
-        });
+                    if($rol === 'superadmin'){
+                        window.location = "../shops";
+                    }else{
+                        window.location = "logout";
+                    }
+    
+                }
+            });
+        }
     })
 
 }

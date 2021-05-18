@@ -63,7 +63,7 @@
                                 <button type="submit" id="btn-submit" class="btn btn-primary">
                                     {{ __('Guardar cambios') }}
                                 </button>
-                                <a onClick="deleteShop('{{ $shop->cif }}')" class="btn btn-danger">
+                                <a onClick="deleteShop('{{ $shop->cif  }}', '{{Auth::user()->rol}}')" class="btn btn-danger">
                                     {{ __('Eliminar tienda') }}
                                 </a>
 

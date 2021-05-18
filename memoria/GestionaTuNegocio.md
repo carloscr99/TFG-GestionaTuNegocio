@@ -94,7 +94,7 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
 - Req. e: El usuario propietario puede modificar cualquier campo de un usuario, incluido él mismo salvo el campo DNI.
 - Req. f: El usuario propietario puede borrar cualquier otro usuario, excepto a si mismo.
 - Req. zc: El usuario propietario puede ver y modificar la información de su negocio, excepto el CIF.
-- Req. g: El usuario propietario puede dar de baja su cuenta junto con toda la información de su negocio (usuarios, productos y la propia tienda).
+- Req. g: El usuario propietario puede dar de baja su cuenta junto con toda la información de su negocio (usuarios, productos y la propia tienda), y el administrador recibirá un correo pidiendo la eliminación de las imágenes de Google Firebase.
 - Req. h: El usuario propietario  puede crear productos. Para cada uno de ellos, se incorporará la siguiente información:
     - Nombre
     - Descripción (no obiligatorio)
@@ -112,15 +112,17 @@ En esta vista, solo habrá el manual de como se usa nuestra aplicación, así co
 - Req. ze: El usuario encargado puede listar los trabajadores.
 - Req. zf: El usuario encargado no puede añadir trabajadores.
 - Req. ñ: El usuario encargado puede editar sus datos como trabajador, salvo el DNI, su rol y el CIF de la empresa donde trabaja.
+- Req. zh: El usuario encargado no puede eliminar trabajadores.
 - Req. o: El usuario trabajador puede listar los productos.
 - Req. p: El usuario trabajador puede modificar el stock y el precio de los productos.
 - Req. zd: El usuario trabajador no puede eliminar productos.
 - Req. q: El usuario trabajador puede listar los empleados.
 - Req. zg: El usuario trabajador no puede añadir trabajadores.
 - Req. r: El usuario trabajador puede modificar sus datos de trabajador, salvo el DNI, su rol y el CIF de la empresa donde trabaja.
+- Req. zi: El usuario trabajador no puede eliminar trabajadores.
 - Req. s: El usuario superUsuario puede listar todas las tiendas registradas en nuestra aplicación.
 - Req. t: El usuario superUsuario puede modificar todas las tiendas registradas en nuestra aplicación, excepto el CIF.
-- Req. u: El usuario superUsuario puede eliminar todas las tiendas registradas en nuestra aplicación, eliminando así a los trabajadores y los productos correspondientes a esa tienda.
+- Req. u: El usuario superUsuario puede eliminar todas las tiendas registradas en nuestra aplicación, eliminando así a los trabajadores y los productos correspondientes a esa tienda. También recibirá un correo para eliminar todas las imágenes de Google Firebase.
 - Req. v: El usuario superUsuario puede listar todos los empleados registradas en nuestra aplicación.
 - Req. w: El usuario superUsuario puede modificar todos los empleados registradas en nuestra aplicación, excepto el DNI y el CIF de la empresa donde trabaja.
 - Req. x: El usuario superUsuario puede eliminar todos los empleados registradas en nuestra aplicación.
@@ -161,7 +163,7 @@ Para la realización de la interfaz web, opté por la opción de buscar una plan
 
 ### x.x. Front-end
 
-- HTML: Es un lenguaje de marcas de hipertexto, el cual define la estructura del contenido de la web.\
+- **HTML:** Es un lenguaje de marcas de hipertexto, el cual define la estructura del contenido de la web.\
 Hay muchas marcas para etiquetar el contenido y posicionarlo en la web, y actualmente estamos en la versión 5 de este lenguaje.\
 Una estructura básica para empezar a posicionar contenido en la web, es:
 
@@ -177,18 +179,20 @@ Una estructura básica para empezar a posicionar contenido en la web, es:
 
 ```
 
-- CSS: Es un lenguaje de estilos, el cual se utiliza para describir la presentación de documentos HTML. Este describe como ha de ser renderizado el elemento en la pantalla.\
+- **CSS:** Es un lenguaje de estilos, el cual se utiliza para describir la presentación de documentos HTML. Este describe como ha de ser renderizado el elemento en la pantalla.\
 Actualmente la última versión es la CSS3, la cual nació en 2011, y sigue siendo la última actualmente. Esta contiene especificaciones más completas y amplias que versiones anteriores.\
 He utilziado el CSS en mi proyecto para darle color y forma, así como para adaptar el contenido al tamaño de la pantalla, para cambiar el tipo de fuente de la letra... Entre otras cosas.
 
-- JavaScript: Es un lenguaje de programación ligero, interpetado en tiempo real. Este está basado en prototipos de un solo hilo, con soporte para programación orientada a objetos.\
+- **JavaScript:** Es un lenguaje de programación ligero, interpetado en tiempo real. Este está basado en prototipos de un solo hilo, con soporte para programación orientada a objetos.\
 En mi proyecto, he utilizado este lenguaje de programación para mostrar una alerta, cuando un usuario no tiene premisos para realziar dicha acción, así como para pedir la confirmación de acciones en procesos críticos, como eliminar productos, empleados, o incluso la propia tienda.\
 También, he utilziado JS para subir las imágenes de los productos a Google Firebase, así como para modificarlas en caso de edición de la imagen de un producto, así como para mostrar los carácteres restantes para la descripción del producto, la búsqueda y disposición por orden concreto de los empleados o los productos, entre otras cosas.
 
 
 ### x.x Back-end
 
-- Framework Laravel:
+- **Laravel:** Es un framework de código abierto, para desarrollar aplicaciones y servicios web con PHP.
+En mi desarrollo, he usado Laraver 8, la última versión disponible en la fecha de realización del proyecto. \
+Me decanté por usar este framework dando que lo habíamos visto bastante suferficialmente en clase, y me pareció bastante interesante, por lo que quería entrar más en profundidad en este, y adquirir nuevos conocimientos.
 
 ## 5. Implementación
 
@@ -378,7 +382,15 @@ Los guardamos, y vemos que se nos redirige al home. Si volvemos a aceeder, vemos
 ![ Ventana con información de la tineda ](img/reqZC3.png)
 
 
-- **Prueba Req. g**. //TODO
+- **Prueba Req. g**. Si pulsamos sobre el el botón "Eliminar tienda", nos saldrá el siguiente aviso:
+
+![ Ventana pidiendo confirmación de la acción ](img/reqG.png)
+
+Si confirmamos la acción, vemos como nos redirige a la vista de login.\
+Si vemos el correo del administrador, vemos como ha recibido un correo, solicitando el borrado de los datos de Google Firebase:
+
+![ Correo solicitando el borrado de los datos al administrador ](img/reqG2.png)
+
 
 - **Prueba Req. h**. El usuario propietario crea un producto, llenando los datos:
 
@@ -473,6 +485,11 @@ En el listado de empleados, podemos ver el cambio:
 
 ![  Listado de empleados ](img/reqÑ2.png)
 
+- **Prueba Req. zh**. Pulsamos sobre el botón editar empleado, y vemos que nos sale una alerta inpidiendo que realizemos dicha acción:
+
+![ Alert acción no permitida ](img/reqZH.png)
+
+
 - **Prueba Req. o**. Accedemos a la web desde un usuario cuyo rol sea trabajador, y vemos que puede ver todos los productos que hay registrados en su tienda:
 
 ![  Listado de productos ](img/reqO.png)
@@ -506,6 +523,10 @@ Modificamos sus datos, completando su apellido, y guardando los datos, en el lis
 
 ![ Observamos los cambios guardados ](img/reqR2.png)
 
+- **Prueba Req. zi**. Pulsamos sobre el botón editar empleado, y vemos que nos sale una alerta inpidiendo que realizemos dicha acción:
+
+![ Alert acción no permitida ](img/reqZI.png)
+
 - **Prueba Req. s**. Accedemos con el usuario superAdministrador, y vemos que se nos listan todas las tiendas que hay registradas en nuestra aplicación:
 
 ![ Listado de tiendas ](img/reqS.png)
@@ -518,7 +539,18 @@ Modificamos sus datos, pulsamos en "Guardar cambios", y en el listado de tiendas
 
 ![ Visualización de la edición de tienda superAdmin ](img/reqT2.png)
 
-- **Prueba Req. u**. //TODO
+- **Prueba Req. u**. Cuando accedemos a editar una tienda, vemos como nos aparece también, un botón para eliminar la tienda, si lo pulsamos, nos aparece el siguiente mensaje:
+
+![ Mensaje confirmación borrado tienda ](img/reqU.png)
+
+Si confirmamos la operación, observamos como se va el alert, y después nos redirige a la lista de tiendas, y podemos observar como se ha eliminado:
+
+![ Mensaje confirmación borrado tienda ](img/reqU2.png)
+
+Si accedemos al correo, veremos como hemos recibido un email, para que borremos manualmente la carpeta de las imágenes de Google Firebase de dicha tienda:
+
+![ Correo solicitando el borrado de los datos al administrador ](img/reqU3.png)
+
 
 - **Prueba Req. v**. Accedemos a la venana de "Empleados", y vemos como se nos listan todos los empleados que hay registrados en nuestra plataforma:
 
