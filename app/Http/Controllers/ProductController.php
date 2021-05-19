@@ -84,22 +84,22 @@ class ProductController extends Controller
     public function edit(Request $request)
     {
 
-        $owner = Auth::user();
+        $owner = Auth::user(); 
 
         $validateData =  $request->validate ([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable','string', 'max:300'],
-            'reference' => ['required', 'string', 'max:30', Rule::unique('products')->where('storedAt', $owner->workAt)],
+            'reference' => ['required', 'string', 'max:30'],
             'price' => ['required','regex:/^\d*(\.\d{2})?$/'],
             'stock' => ['required', 'int'],
         ]);
 
-        if($request->urlProducto){
-            DB::update("update products set name=?, description=?, price=?, stock=?, urlImagen=? where storedAt=? and reference=?", 
-            [$request->name, $request->description, $request->price, $request->stock, $request->urlProducto, $owner->workAt , $request->reference]);
-        }else{
+        if($request->urlProducto === 'https://via.placeholder.com/300x200'){
             DB::update("update products set name=?, description=?, price=?, stock=? where storedAt=? and reference=?", 
             [$request->name, $request->description, $request->price, $request->stock, $owner->workAt , $request->reference]);
+        }else{
+            DB::update("update products set name=?, description=?, price=?, stock=?, urlImagen=? where storedAt=? and reference=?", 
+            [$request->name, $request->description, $request->price, $request->stock, $request->urlProducto, $owner->workAt , $request->reference]);
         }
 
      

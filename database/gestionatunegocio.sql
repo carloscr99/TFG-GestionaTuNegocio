@@ -40,16 +40,6 @@ CREATE TABLE `products` (
   `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `products`
---
-
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `stock`, `reference`, `urlImagen`, `storedAt`, `created_at`, `updated_at`) VALUES
-(25, 'iphone 12', 'Apple iPhone 12 128GB', 1200, 21, 'ds2', 'https://firebasestorage.googleapis.com/v0/b/gestionatunegociolaravel.appspot.com/o/H70763552%2Fds2?alt=media&token=0b88103d-92f7-406f-a4f5-d4e90ab06eea', 'H70763552', '2021-05-02', '2021-05-02'),
-(27, 'Echo dot 4', 'Altavoz inteligente', 40, 15, 'echodot4', 'https://firebasestorage.googleapis.com/v0/b/gestionatunegociolaravel.appspot.com/o/H70763552%2Fechodot4?alt=media&token=125f9c42-2e07-4196-838d-b6478f9fbb8b', 'H70763552', '2021-05-09', '2021-05-09'),
-(28, 'Samsung Galaxy s21 5G', 'Samsung Galaxy s21 5G.\r\n128GB de almacenamiento interno.\r\n12GB de RAM.', 857, 20, 's215G128', 'https://firebasestorage.googleapis.com/v0/b/gestionatunegociolaravel.appspot.com/o/H70763552%2Fs215G128?alt=media&token=437be78f-7964-46cb-9f1a-873ddef6afc3', 'H70763552', '2021-05-09', '2021-05-09'),
-(32, 'Reloj despertador', NULL, 23, 10, 'relojDespertador', 'https://via.placeholder.com/300x200', 'H70763552', '2021-05-16', '2021-05-16');
-
 -- --------------------------------------------------------
 
 --

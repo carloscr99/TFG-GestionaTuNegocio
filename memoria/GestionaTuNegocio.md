@@ -221,11 +221,9 @@ Pero, porqué he utilizado Google Firebase, y no otras opciones?
 
 Para realizar el despliegue de la aplicación, primero de todo probé en host gratuitos, como hostinger, pero la transferencia de ficheros, que se realiza mediante protocolo FTP, era muy lento, por lo que opté a adquirir un servidor en IONOS.\
 En este caso, la transferencia de archivos era mucho más rápida, pero a la hora de realizar la implementación, llegaron los problemas, por ejemplo:
- - Problemas a la hora de visualizar la página web, dado que poniendo el dominio, simplemente mostraba la página de inicio por defecto, y no lo que había en la carpeta /public, que es de donde parte Laravel.
- - Modifiqué donde apuntaba la raiz del directorio, para poder visualizar la página web.
- - Investigué como crear un fichero .htaccess, que estructura tenía que tener, y que poner, para que obtuviera los recursos (css, imágenes...) de la web, y no la mostrara como texto plano.
- - Finalmente no conseguí que funcionara la parte de las rutas de Laravel en el servidor, ya que el framework, tiene hace unas rutas, para llamar a un fichero....
- TODO: Acabar este últim punt
+ - Problemas a la hora de visualizar la página web, dado que poniendo el dominio, simplemente mostraba la página de inicio por defecto, y no lo que había en la carpeta /public, que es de donde parte Laravel, por lo que tuve que modificar donde apuntaba la raiz del directorio, para poder visualizar la página web.
+ - Uno de los mayores problemas, fue aprender a como crear un fichero .htaccess, que estructura tenía que tener y atributos poner, para que obtuviera los recursos (css, imágenes...) de la web, y no la mostrara como texto plano, así como para que funcionaran las rutas de Laravel, finalmente, con búsquedas en Google y un poco de intuición, logré realizar que funncionara.
+ - Otro de los apartados que funcionaban correctamente en local, y al pasarlo al servidor, ha sido el envío del correo electrónico cuando se solicita el restablecimiento de la contraseña, así como en el borrado de la cuenta.
 
 ## x. Pruebas
 
