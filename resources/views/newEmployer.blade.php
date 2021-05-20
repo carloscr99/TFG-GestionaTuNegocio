@@ -13,10 +13,6 @@
                 <div class="card-body">
                     <form method="POST" action="EditEmployer">
                         @csrf
-                        @if($employer->restablished)
-                        <p>Su contraseña ha sido restablecida, por favor, cambiela primero.</p>
-                        @endif
-
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre ') }}</label>
 
