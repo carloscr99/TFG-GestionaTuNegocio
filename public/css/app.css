@@ -10100,10 +10100,10 @@ h1{
 }
 .subTitle{
 text-align: center;
-padding-top: 15rem;
+padding-top: 1rem;
 color: white;
 font-family: 'cairo bold', sans-serif;;
-font-size: 3rem;
+font-size: 2rem;
 }
 
 .navbar-nav{
@@ -10128,7 +10128,7 @@ font-size: 3rem;
 .content{
   font-family: 'cairo', sans-serif;
   color: white;
-  font-size: 2.5em;
+  font-size: 2em;
   text-align: center;
   margin-top: 1em;
   padding: 0.5em;
@@ -10154,6 +10154,18 @@ font-size: 3rem;
 .numberCharacters{
   text-align: right;
   margin-top: 1.5px;
+}
+
+main{
+  min-height: calc(100vh - 11rem );
+}
+.demo{
+  width: 50%; 
+  height: 50%;
+}
+
+ul{
+  text-align: initial;
 }
 
 /* Menú hamburgesa */

@@ -214,5 +214,11 @@
     <script src="{{ asset('../resources/js/hamburguerMenu.js') }}"></script>
 
 </body>
+<footer class="py-4 bg-dark">
+        <div class="container px-5">
+            <p class="text-center text-white">Si tienes cualquer problema, ponte en contacto con nosotros a través de <a href="mailto:gestionatunegocioccr@gmail.com">gestionatunegocioccr@gmail.com</a> </p>    
+            <p class="m-0 text-center text-white">Copyright &copy; Gestiona Tu Negocio 2021</p>
+        </div>
+        </footer>
 
 </html>
